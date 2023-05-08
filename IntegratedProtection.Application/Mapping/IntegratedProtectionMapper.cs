@@ -1,7 +1,4 @@
-﻿using IntegratedProtection.Application.CivilRegistry.ViewModels;
-using IntegratedProtection.Core.CivilRegistry;
-
-namespace IntegratedProtection.Application.Mapping;
+﻿namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
@@ -9,18 +6,29 @@ public class IntegratedProtectionMapper : Profile
     {
         PostPersonMapper();
         GetPersonMapper();
-
+        PutPersonMapper();
     }
 
     #region Persons Mapping
     public void PostPersonMapper()
     {
         CreateMap<PostPersonViewModel, Person>().ReverseMap();
+
     }
+
+    public void PutPersonMapper()
+    {
+        CreateMap<PutPersonViewModel, Person>().ReverseMap();
+    }
+
     public void GetPersonMapper()
     {
-        CreateMap<GetPersonViewModel, Person>().ReverseMap();
+        CreateMap<Person, GetPersonViewModel>()
+            .ForMember(dist => dist.DateOfBirth,
+          cfg =>
+          cfg.MapFrom(src => src.DateOfBirth.ToString("MMMM dd, yyyy")));
     }
+
     #endregion
 
 }

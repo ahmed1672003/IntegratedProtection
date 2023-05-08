@@ -1,5 +1,4 @@
 ﻿
-
 namespace IntegratedProtection.API.Controllers;
 
 [Route("api/[controller]/[action]")]
@@ -41,6 +40,33 @@ public class PersonController : IntegratedProtectionController
     public async Task<IActionResult> GetPersonBySSN([FromQuery] string SSN)
     {
         var response = await _mediator.Send(new GetPersonBySSNQuery(SSN.ToString()));
+        return NewResult(response);
+    }
+
+    [HttpGet, ActionName("GetAll")]
+    public async Task<IActionResult> GetAllPersons()
+    {
+        var response = await _mediator.Send(new GetAllPersonsQuery());
+
+        return NewResult(response);
+    }
+
+    #endregion
+
+    #region => Delete
+
+    [HttpDelete("{id:int}"), ActionName("DeleteById")]
+    public async Task<IActionResult> DeleteById(int id)
+    {
+        var response = await _mediator.Send(new DeletePersonByIdCommand(id));
+        return NewResult(response);
+    }
+
+    [HttpDelete, ActionName("DeleteBySSN")]
+    public async Task<IActionResult> DeleteBySSN([FromQuery] string SSN)
+    {
+        var response = await _mediator.Send(new DeletePersonBySSNCommand(SSN));
+
         return NewResult(response);
     }
 

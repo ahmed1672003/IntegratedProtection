@@ -30,11 +30,11 @@ public class Response<TData>
 public class ResponseHandler : Handler
 {
     public ResponseHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper) { }
-    public Response<TData> Delete<TData>() => new()
+    public Response<TData> Delete<TData>(string message = null) => new()
     {
         StatusCode = HttpStatusCode.OK,
         Succeeded = true,
-        Message = "Deleted Successfully"
+        Message = message == null ? "Deleted Successfully" : message
     };
     public Response<TData> Success<TData>(TData data, object meta = null) => new()
     {

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntegratedProtection.Application.CivilRegistry.ViewModels;
 public class PostPersonViewModel
@@ -26,6 +26,9 @@ public class PostPersonViewModel
     public string StreetName { get; set; }
 
     [MaxLength(100)]
+    public string Center { get; set; }
+
+    [MaxLength(100)]
     public string Country { get; set; }
     [MaxLength(100)]
     public string Governorate { get; set; }
@@ -40,11 +43,11 @@ public class PostPersonViewModel
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime DateOfBirth { get; set; }
 }
-
-[PrimaryKey(nameof(Id))]
 public class PutPersonViewModel
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
 
     [MaxLength(14)]
     public string SSN { get; set; }
@@ -69,6 +72,10 @@ public class PutPersonViewModel
 
     [MaxLength(100)]
     public string Country { get; set; }
+
+    [MaxLength(100)]
+    public string Center { get; set; }
+
     [MaxLength(100)]
     public string Governorate { get; set; }
 
@@ -78,7 +85,9 @@ public class PutPersonViewModel
     [MaxLength(100)]
     public string Status { get; set; }
 
+
     [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime DateOfBirth { get; set; }
 }
 public class GetPersonViewModel
@@ -103,9 +112,7 @@ public class GetPersonViewModel
     [MaxLength(100)]
     public string FullName { get; set; }
 
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    public DateTime DateOfBirth { get; set; }
+    public string DateOfBirth { get; set; }
 
     public int Age { get; set; }
 }

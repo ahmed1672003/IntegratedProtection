@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -87,11 +88,11 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     StreetNumber = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     StreetName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Center = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Governorate = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Religion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue:
-                    new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified))
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified))
                 },
                 constraints: table =>
                 {
@@ -132,6 +133,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    SSN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CardPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Job = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),

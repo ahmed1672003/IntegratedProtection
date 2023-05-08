@@ -40,9 +40,18 @@ public class PutPersonHandler :
     public async Task<Response<GetPersonViewModel>>
         Handle(PutPersonCommand request, CancellationToken cancellationToken)
     {
-        var viewModel = request.ViewModel;
-        var model = _mapper.Map<Person>(viewModel);
+        var isModelExist = await _context.Persons.IsExist(e => e.Id.Equals(request.ViewModel.Id));
+
+        if (!isModelExist)
+            return NotFound<GetPersonViewModel>("person not found !");
+
+        var model = await _context.Persons.GetAsync(e => e.Id.Equals(request.ViewModel.Id));
+
+        model = _mapper.Map<Person>(request.ViewModel);
+
         var resultModel = await _context.Persons.UpdateAsync(model);
+
+
         try
         {
             await _context.SaveChangesAsync();
@@ -52,6 +61,7 @@ public class PutPersonHandler :
 
             return BadRequest<GetPersonViewModel>("internal server error");
         }
+
         var resultViewModel = _mapper.Map<GetPersonViewModel>(resultModel);
         return Accepted(resultViewModel, message: "Update Success ");
     }
@@ -59,5 +69,46 @@ public class PutPersonHandler :
 
 #endregion
 
+#region => Delete Person Handler
+public class DeletePersonByIdHandler :
+    ResponseHandler,
+    IRequestHandler<DeletePersonByIdCommand, Response<GetPersonViewModel>>
+{
+    public DeletePersonByIdHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
+    {
+    }
 
+    public async Task<Response<GetPersonViewModel>>
+        Handle(DeletePersonByIdCommand request, CancellationToken cancellationToken)
+    {
+        if (!await _context.Persons.IsExist(e => e.Id == request.Id))
+            return NotFound<GetPersonViewModel>("person not found !");
+
+        await _context.Persons.ExecuteDeleteAsync(e => e.Id == request.Id);
+
+        return Delete<GetPersonViewModel>("person deleted success !");
+    }
+}
+
+public class DeletePersonBySSNHandler :
+    ResponseHandler,
+    IRequestHandler<DeletePersonBySSNCommand, Response<GetPersonViewModel>>
+{
+    public DeletePersonBySSNHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
+    {
+    }
+
+    public async Task<Response<GetPersonViewModel>>
+        Handle(DeletePersonBySSNCommand request, CancellationToken cancellationToken)
+    {
+
+        if (!await _context.Persons.IsExist(e => e.SSN.Equals(request.SSN)))
+            return NotFound<GetPersonViewModel>("person not found !");
+
+        await _context.Persons.ExecuteDeleteAsync(e => e.SSN.Equals(request.SSN));
+
+        return Delete<GetPersonViewModel>("person deleted success !");
+    }
+}
+#endregion
 #endregion

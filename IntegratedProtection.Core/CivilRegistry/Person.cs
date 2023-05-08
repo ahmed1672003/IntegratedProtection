@@ -29,6 +29,10 @@ public class Person : Base<int>
 
     [MaxLength(100)]
     public string Country { get; set; }
+
+    [MaxLength(100)]
+    public string Center { get; set; }
+
     [MaxLength(100)]
     public string Governorate { get; set; }
 
@@ -39,7 +43,7 @@ public class Person : Base<int>
     public string Status { get; set; }
 
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime DateOfBirth { get; set; }
     public Card Card { get; set; }
 
@@ -56,7 +60,7 @@ public class Person : Base<int>
     {
         get
         {
-            return $"{StreetNumber}-{StreetName}-{Governorate}-{Country}";
+            return $"{StreetName}-{Center}-{Governorate}-{Country}-{StreetNumber}";
         }
     }
 
@@ -68,7 +72,6 @@ public class Person : Base<int>
             return DateTime.Now.Year - DateOfBirth.Year;
         }
     }
-
 }
 
 

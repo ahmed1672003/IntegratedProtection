@@ -5,16 +5,18 @@ public class Card : Base<int>
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public override int Id { get; set; }
-
+    public string SSN { get; set; }
     public string CardPath { get; set; }
 
     [MaxLength(100)]
     public string Job { get; set; }
 
     [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
 
     [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime EndDate { get; set; }
     public int PersonId { get; set; }
 
@@ -26,7 +28,7 @@ public class Card : Base<int>
     {
         get
         {
-            if (Convert.ToInt32(EndDate.Year) - Convert.ToInt32(CreatedDate.Year) <= 10)
+            if ((EndDate.Year - CreatedDate.Year) <= 7)
                 return true;
             else
                 return false;
