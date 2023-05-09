@@ -1,5 +1,3 @@
-using IntegratedProtection.Application;
-
 namespace IntegratedProtection.API;
 public class Program
 {

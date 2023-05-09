@@ -1,10 +1,13 @@
-﻿namespace IntegratedProtection.Application.Mapping;
+﻿
+
+namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
     public IntegratedProtectionMapper()
     {
-        #region Traffic Mapper
+        #region CivilRegistry Mapper
+
         #region Persons Mapping
         PostPersonMapper();
         GetPersonMapper();
@@ -18,21 +21,41 @@ public class IntegratedProtectionMapper : Profile
         #endregion
 
         #endregion
+
+
+        #region Traffic Mapper
+
+        #region Cars Mapping
+        PostCarMapper();
+        PutCarMapper();
+        GetCarMapper();
+        #endregion
+
+        #region CarsDrivers Mapping
+
+        #endregion
+
+        #region StolenCars Mapping
+
+        #endregion
+
+        #region TrafficOfficers Mapping
+
+        #endregion
+
+        #endregion
     }
 
-    #region Traffic Mapper
+    #region CivilRegistry Mapper
     #region Persons Mapping
     public void PostPersonMapper()
     {
         CreateMap<PostPersonViewModel, Person>().ReverseMap();
-
     }
-
     public void PutPersonMapper()
     {
         CreateMap<PutPersonViewModel, Person>().ReverseMap();
     }
-
     public void GetPersonMapper()
     {
         CreateMap<Person, GetPersonViewModel>()
@@ -65,5 +88,40 @@ public class IntegratedProtectionMapper : Profile
     #endregion
     #endregion
 
+    #region Traffic Mapper
 
+    #region Cars Mapping
+    public void PostCarMapper()
+    {
+        CreateMap<PostCarViewModel, Car>().ReverseMap();
+    }
+    public void PutCarMapper()
+    {
+        CreateMap<PutCarViewModel, Car>().ReverseMap();
+    }
+    public void GetCarMapper()
+    {
+        CreateMap<Car, GetCarViewModel>()
+        .ForMember(dist => dist.CreatedDate,
+        cfg =>
+        cfg.MapFrom(src => src.CreatedDate.ToString("MMMM dd, yyyy")))
+        .ForMember(dist => dist.EndDate,
+        cfg =>
+        cfg.MapFrom(src => src.EndDate.ToString("MMMM dd, yyyy")));
+    }
+    #endregion
+
+    #region CarsDrivers Mapping
+
+    #endregion
+
+    #region StolenCars Mapping
+
+    #endregion
+
+    #region TrafficOfficers Mapping
+
+    #endregion
+
+    #endregion
 }
