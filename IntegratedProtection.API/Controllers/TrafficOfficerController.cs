@@ -43,7 +43,6 @@ public class TrafficOfficerController : IntegratedProtectionController
     }
     #endregion
 
-
     #region DELETE
     [HttpDelete("{id:int}"), ActionName("DeleteById")]
     public async Task<IActionResult> DeleteById(int? id)
