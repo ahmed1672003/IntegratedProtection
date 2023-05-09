@@ -120,4 +120,53 @@ public class GetDriverViewModel
 }
 #endregion
 
+#region TrafficOfficers View Models
+
+public class PostTrafficOfficerViewModel
+{
+    public string Code { get; set; }
+
+    [MaxLength(100)]
+    public string Center { get; set; }
+
+    [MaxLength(100)]
+    public string FirstName { get; set; }
+
+    [MaxLength(100)]
+    public string MiddelName { get; set; }
+
+    [MaxLength(100)]
+    public string LastName { get; set; }
+}
+
+public class PutTrafficOfficerViewModel
+{
+    public int Id { get; set; }
+    public string Code { get; set; }
+
+    [MaxLength(100)]
+    public string Center { get; set; }
+
+    [MaxLength(100)]
+    public string FirstName { get; set; }
+
+    [MaxLength(100)]
+    public string MiddelName { get; set; }
+
+    [MaxLength(100)]
+    public string LastName { get; set; }
+}
+
+public class GetTrafficOfficerViewModel
+{
+    public int Id { get; set; }
+    public string Code { get; set; }
+
+    [MaxLength(100)]
+    public string Center { get; set; }
+
+    public string FullName { get; set; }
+}
+#endregion
+
 

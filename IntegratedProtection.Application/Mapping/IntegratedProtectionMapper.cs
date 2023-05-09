@@ -38,6 +38,11 @@ public class IntegratedProtectionMapper : Profile
         #endregion
 
 
+        #region TrafficOfficers Mapping
+        PostTrafficOfficerMapper();
+        PutTrafficOfficerMapper();
+        GetTrafficOfficerMapper();
+        #endregion
 
         #region CarsDrivers Mapping
 
@@ -47,14 +52,12 @@ public class IntegratedProtectionMapper : Profile
 
         #endregion
 
-        #region TrafficOfficers Mapping
-
-        #endregion
 
         #endregion
     }
 
     #region CivilRegistry Mapper
+
     #region Persons Mapping
     public void PostPersonMapper()
     {
@@ -94,6 +97,7 @@ public class IntegratedProtectionMapper : Profile
             cfg.MapFrom(src => src.EndDate.ToString("MMM dd,yyyy"))).ReverseMap();
     }
     #endregion
+
     #endregion
 
     #region Traffic Mapper
@@ -143,14 +147,24 @@ public class IntegratedProtectionMapper : Profile
     }
     #endregion
 
-    #region Drivers Mapping
+    #region TrafficOfficers Mapping
+    public void PostTrafficOfficerMapper()
+    {
+        CreateMap<PostTrafficOfficerViewModel, TrafficOfficer>().ReverseMap();
+    }
+
+    public void PutTrafficOfficerMapper()
+    {
+        CreateMap<PutTrafficOfficerViewModel, TrafficOfficer>().ReverseMap();
+    }
+
+    public void GetTrafficOfficerMapper()
+    {
+        CreateMap<TrafficOfficer, GetTrafficOfficerViewModel>().ReverseMap();
+    }
     #endregion
 
     #region StolenCars Mapping
-
-    #endregion
-
-    #region TrafficOfficers Mapping
 
     #endregion
 

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace IntegratedProtection.Application.Traffic.Features.TrafficOfficers.Commands;
 
-namespace IntegratedProtection.Application.Traffic.Features.TrafficOfficers.Commands
-{
-    internal class TrafficOfficersCommands
-    {
-    }
-}
+public record PostTrafficOfficerCommand(PostTrafficOfficerViewModel ViewModel) : IRequest<Response<GetTrafficOfficerViewModel>>;
+public record PutTrafficOfficerCommand(PutTrafficOfficerViewModel ViewModel) : IRequest<Response<GetTrafficOfficerViewModel>>;
+public record DeleteTrafficOfficerByIdCommand(int? Id) : IRequest<Response<GetTrafficOfficerViewModel>>;
+public record DeleteAllTrafficOfficersCommand() : IRequest<Response<GetTrafficOfficerViewModel>>;
+
