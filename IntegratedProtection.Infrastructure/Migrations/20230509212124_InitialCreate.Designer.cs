@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230509115818_InitialCreate")]
+    [Migration("20230509212124_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -248,6 +248,10 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<int>("TrafficOfficerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CarId", "TrafficOfficerId");
 
                     b.HasIndex("TrafficOfficerId");
@@ -312,7 +316,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("IntegratedProtection.Core.Traffic.Driver", "Driver")
-                        .WithMany("CarDriver")
+                        .WithMany("CarsDrivers")
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -356,7 +360,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Driver", b =>
                 {
-                    b.Navigation("CarDriver");
+                    b.Navigation("CarsDrivers");
                 });
 
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.TrafficOfficer", b =>

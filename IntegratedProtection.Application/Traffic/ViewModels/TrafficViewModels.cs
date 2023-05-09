@@ -63,12 +63,6 @@ public class GetCarViewModel
     [MaxLength(100)]
     public string Color { get; set; }
 
-    [MaxLength(4)]
-    public string Number { get; set; }
-
-    [MaxLength(4)]
-    public string Letters { get; set; }
-
     public string CreatedDate { get; set; }
 
     public string EndDate { get; set; }
@@ -166,6 +160,22 @@ public class GetTrafficOfficerViewModel
     public string Center { get; set; }
 
     public string FullName { get; set; }
+}
+#endregion
+
+
+#region Stolen Cars View Models
+public class PostStolenCarViewModel
+{
+    public int? CarId { get; set; }
+    public int? TrafficOfficerId { get; set; }
+}
+
+
+public class GetStolenCarViewModel
+{
+    public GetCarViewModel CarViewModel { get; set; }
+    public GetTrafficOfficerViewModel TrafficOfficerViewModel { get; set; }
 }
 #endregion
 

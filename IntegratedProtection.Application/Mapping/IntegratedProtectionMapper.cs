@@ -37,21 +37,20 @@ public class IntegratedProtectionMapper : Profile
         GetDriverMapper();
         #endregion
 
-
         #region TrafficOfficers Mapping
         PostTrafficOfficerMapper();
         PutTrafficOfficerMapper();
         GetTrafficOfficerMapper();
         #endregion
 
+
+        #region StolenCars Mapping
+        StolenCarMapper();
+        #endregion
+
         #region CarsDrivers Mapping
 
         #endregion
-
-        #region StolenCars Mapping
-
-        #endregion
-
 
         #endregion
     }
@@ -165,6 +164,10 @@ public class IntegratedProtectionMapper : Profile
     #endregion
 
     #region StolenCars Mapping
+    public void StolenCarMapper()
+    {
+        CreateMap<PostStolenCarViewModel, StolenCar>();
+    }
 
     #endregion
 

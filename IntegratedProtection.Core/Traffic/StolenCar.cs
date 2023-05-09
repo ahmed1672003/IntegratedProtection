@@ -4,12 +4,21 @@
 PrimaryKey(nameof(CarId), nameof(TrafficOfficerId))]
 public class StolenCar
 {
+    [DataType(DataType.Date)]
+    public string CreatedDate { get; set; }
+
     public int CarId { get; set; }
     public int TrafficOfficerId { get; set; }
 
     [ForeignKey(nameof(TrafficOfficerId))]
-    public TrafficOfficer TrafficOfficer { get; set; }
+    public TrafficOfficer TrafficOfficer { get; set; } = null!;
 
     [ForeignKey(nameof(CarId))]
-    public Car Car { get; set; }
+    public Car Car { get; set; } = null!;
+
+    public StolenCar()
+    {
+        CreatedDate = DateTime.Now.ToShortDateString();
+    }
+
 }

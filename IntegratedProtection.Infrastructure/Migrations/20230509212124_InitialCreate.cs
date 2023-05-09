@@ -172,7 +172,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 columns: table => new
                 {
                     CarId = table.Column<int>(type: "int", nullable: false),
-                    TrafficOfficerId = table.Column<int>(type: "int", nullable: false)
+                    TrafficOfficerId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
