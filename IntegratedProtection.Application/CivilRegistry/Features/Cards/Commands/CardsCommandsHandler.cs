@@ -95,6 +95,11 @@ public class DeleteCardByIdHandler :
     public async Task<Response<GetCardViewModel>>
         Handle(DeleteCardByIdCommand request, CancellationToken cancellationToken)
     {
+
+        if (request.Id.Equals(null))
+            return BadRequest<GetCardViewModel>("id is required !");
+
+
         if (!await _context.Cards.IsExist(c => c.Id.Equals(request.Id)))
             return NotFound<GetCardViewModel>($"card with this id:{request.Id} not found !");
 
@@ -123,6 +128,9 @@ public class DeleteCardBySSNHandler :
     public async Task<Response<GetCardViewModel>>
         Handle(DeleteCardBySSNCommand request, CancellationToken cancellationToken)
     {
+        if (request.SSN.Equals(null))
+            return BadRequest<GetCardViewModel>("SSN is required !");
+
         if (!await _context.Cards.IsExist(c => c.SSN.Equals(request.SSN)))
             return NotFound<GetCardViewModel>($"card with this SSN:{request.SSN} not found !");
 

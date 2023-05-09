@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230509022918_InitialCreate")]
+    [Migration("20230509115818_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -184,9 +184,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Letters")
                         .IsRequired()
                         .HasMaxLength(4)
@@ -231,9 +228,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SSN")

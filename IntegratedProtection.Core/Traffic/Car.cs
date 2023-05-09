@@ -22,22 +22,28 @@ public class Car : Base<int>
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
 
-    [DataType(DataType.Date)]
-    public DateTime EndDate { get; set; }
 
     public ICollection<StolenCar> StolenCars { get; set; }
     public ICollection<CarDriver> CarDriver { get; set; }
 
 
+    [NotMapped]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
+    public DateTime EndDate
+    {
+        get { return CreatedDate.AddYears(10).Date; }
+    }
 
     [NotMapped]
     public bool IsLicenseValid
     {
         get
         {
-            if (Convert.ToInt32(EndDate.Year) - Convert.ToInt32(CreatedDate.Year) <= 10)
+            if (DateTime.Now.Year - CreatedDate.Year <= 10)
                 return true;
             else
                 return false;
@@ -55,8 +61,7 @@ public class Car : Base<int>
 
     public Car()
     {
-        CreatedDate = DateTime.Now.Date;
-        EndDate = CreatedDate.AddYears(10).Date;
+        //CreatedDate = DateTime.Now.Date;
         CarDriver = new HashSet<CarDriver>();
         StolenCars = new HashSet<StolenCar>();
     }

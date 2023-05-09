@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="CentralSecurity\" />
     <Folder Include="CentralSecurity\Features\" />
-    <Folder Include="Traffic\Features\" />
   </ItemGroup>
 
 </Project>

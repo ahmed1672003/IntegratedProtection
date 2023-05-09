@@ -32,8 +32,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Color = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Number = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Letters = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,8 +63,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

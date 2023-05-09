@@ -4,6 +4,7 @@ public class IntegratedProtectionMapper : Profile
 {
     public IntegratedProtectionMapper()
     {
+        #region Traffic Mapper
         #region Persons Mapping
         PostPersonMapper();
         GetPersonMapper();
@@ -15,10 +16,11 @@ public class IntegratedProtectionMapper : Profile
         PutCardMapper();
         GetCardMapper();
         #endregion
+
+        #endregion
     }
 
     #region Traffic Mapper
-
     #region Persons Mapping
     public void PostPersonMapper()
     {
@@ -62,4 +64,6 @@ public class IntegratedProtectionMapper : Profile
     }
     #endregion
     #endregion
+
+
 }

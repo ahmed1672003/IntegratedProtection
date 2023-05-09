@@ -40,7 +40,7 @@
         }
 
         [HttpGet("{id:int}"), ActionName("GetById")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int? id)
         {
             var response = await _mediator.Send(new GetCardByIdQuery(id));
             return NewResult(response);
@@ -52,11 +52,29 @@
             var response = await _mediator.Send(new GetCardBySSNQuery(SSN));
             return NewResult(response);
         }
+
+        [HttpGet("{id:int}"), ActionName("GetByIdWithPerson")]
+        public async Task<IActionResult> GetByIdWithPerson(int? id)
+        {
+            var response = await _mediator.Send(new GetCardByIdWithPersonQuery(id));
+
+            return NewResult(response);
+        }
+
+        [HttpGet, ActionName("GetBySSNWithPerson")]
+        public async Task<IActionResult> GetBySSNWithPerson([FromQuery] string SSN)
+        {
+            var response = await _mediator.Send(new GetCardBySSNWithPersonQuery(SSN));
+
+            return NewResult(response);
+        }
+
+
         #endregion
 
         #region => Delete 
         [HttpDelete("{id:int}"), ActionName("DeleteById")]
-        public async Task<IActionResult> DeleteById(int id)
+        public async Task<IActionResult> DeleteById(int? id)
         {
             var response = await _mediator.Send(new DeleteCardByIdCommand(id));
             return NewResult(response);
