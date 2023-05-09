@@ -36,25 +36,27 @@ public class ResponseHandler : Handler
         Succeeded = true,
         Message = message == null ? "Deleted Successfully" : message
     };
-    public Response<TData> Success<TData>(TData data, object meta = null) => new()
-    {
-        Data = data,
-        StatusCode = HttpStatusCode.OK,
-        Succeeded = true,
-        Message = "Retrieve Successfully",
-        Meta = meta
-    };
+    public Response<TData> Success<TData>(TData data, object meta = null, string message = null)
+        => new()
+        {
+            Data = data,
+            StatusCode = HttpStatusCode.OK,
+            Succeeded = true,
+            Message = message == null ? "Retrieve Successfully" : message,
+            Meta = meta
+        };
     public Response<TData> Unauthorized<TData>() => new()
     {
         StatusCode = HttpStatusCode.Unauthorized,
         Succeeded = true,
         Message = "Un Authorized"
     };
-    public Response<TData> BadRequest<TData>(string message) => new()
+    public Response<TData> BadRequest<TData>(string message = null, object meta = null) => new()
     {
         StatusCode = HttpStatusCode.BadRequest,
         Succeeded = false,
         Message = message == null ? "Bad Request" : message,
+        Meta = meta
     };
     public Response<TData> NotFound<TData>(string message) => new()
     {
@@ -70,11 +72,11 @@ public class ResponseHandler : Handler
         Message = "Created Successfully",
         Meta = meta
     };
-    public Response<TData> NoContent<TData>() => new()
+    public Response<TData> NoContent<TData>(string message = null) => new()
     {
         Succeeded = true,
         StatusCode = HttpStatusCode.NoContent,
-        Message = "No Content"
+        Message = message == null ? "no data founded !" : message
     };
     public Response<TData> Accepted<TData>(TData data, string message = null, object meta = null) => new()
     {

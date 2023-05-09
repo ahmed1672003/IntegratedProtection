@@ -33,7 +33,7 @@ public class Program
 
         #region Handel Serialize loop references (but this in ASP.NetCore.OpenApi)
         builder.Services
-           .AddControllers()
+           .AddControllersWithViews()
            .AddJsonOptions(options =>
            {
                /* Use JsonSerializerOptions Instead of using [JsonIgnore] */

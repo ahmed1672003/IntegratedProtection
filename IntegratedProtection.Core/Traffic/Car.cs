@@ -26,7 +26,11 @@ public class Car : Base<int>
 
     [DataType(DataType.Date)]
     public DateTime EndDate { get; set; }
-    public bool IsStolen { get; set; }
+
+    public ICollection<StolenCar> StolenCars { get; set; }
+    public ICollection<CarDriver> CarDriver { get; set; }
+
+
 
     [NotMapped]
     public bool IsLicenseValid
@@ -53,9 +57,8 @@ public class Car : Base<int>
     {
         CreatedDate = DateTime.Now.Date;
         EndDate = CreatedDate.AddYears(10).Date;
-        IsStolen = false;
         CarDriver = new HashSet<CarDriver>();
+        StolenCars = new HashSet<StolenCar>();
     }
 
-    public ICollection<CarDriver> CarDriver { get; set; }
 }

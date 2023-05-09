@@ -12,6 +12,8 @@ public class IntegratedProtectionDbContext : DbContext
         new CarConfigurations().Configure(builder.Entity<Car>());
         new CarDriverConfigurations().Configure(builder.Entity<CarDriver>());
         new DriverConfigurations().Configure(builder.Entity<Driver>());
+        new StolenCarConfigurations().Configure(builder.Entity<StolenCar>());
+        new TrafficOfficerConfigurations().Configure(builder.Entity<TrafficOfficer>());
     }
 
     #region Central Security Database Mapping
@@ -27,5 +29,7 @@ public class IntegratedProtectionDbContext : DbContext
     public DbSet<Car> Cars { get; set; }
     public DbSet<CarDriver> CarsDrivers { get; set; }
     public DbSet<Driver> Drivers { get; set; }
+    public DbSet<StolenCar> StolenCars { get; set; }
+    public DbSet<TrafficOfficer> TrafficOfficers { get; set; }
     #endregion
 }

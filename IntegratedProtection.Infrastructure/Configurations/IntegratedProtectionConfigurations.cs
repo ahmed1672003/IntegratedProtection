@@ -15,6 +15,7 @@ public class CardConfigurations : IEntityTypeConfiguration<Card>
 {
     public void Configure(EntityTypeBuilder<Card> builder)
     {
+
     }
 }
 
@@ -22,8 +23,7 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
 {
     public void Configure(EntityTypeBuilder<Person> builder)
     {
-        builder.Property(e => e.DateOfBirth)
-            .HasDefaultValue(new DateTime().Date);
+
     }
 }
 
@@ -45,6 +45,20 @@ public class CarDriverConfigurations : IEntityTypeConfiguration<CarDriver>
 public class DriverConfigurations : IEntityTypeConfiguration<Driver>
 {
     public void Configure(EntityTypeBuilder<Driver> builder)
+    {
+    }
+}
+
+public class StolenCarConfigurations : IEntityTypeConfiguration<StolenCar>
+{
+    public void Configure(EntityTypeBuilder<StolenCar> builder)
+    {
+    }
+}
+
+public class TrafficOfficerConfigurations : IEntityTypeConfiguration<TrafficOfficer>
+{
+    public void Configure(EntityTypeBuilder<TrafficOfficer> builder)
     {
     }
 }

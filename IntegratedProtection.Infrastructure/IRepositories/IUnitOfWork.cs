@@ -8,6 +8,8 @@ public interface IUnitOfWork : IAsyncDisposable
     ICriminalRepository Criminals { get; }
     IDriverRepository Drivers { get; }
     IPersonRepository Persons { get; }
+    IStolenCarRepository StolenCars { get; }
+    ITrafficOfficerRepository TrafficOfficers { get; }
 
     Task<int> SaveChangesAsync();
 }

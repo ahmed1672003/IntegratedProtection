@@ -8,6 +8,9 @@ public class UnitOfWork : IUnitOfWork
     public ICriminalRepository Criminals { get; private set; }
     public IDriverRepository Drivers { get; private set; }
     public IPersonRepository Persons { get; private set; }
+    public IStolenCarRepository StolenCars { get; private set; }
+    public ITrafficOfficerRepository TrafficOfficers { get; private set; }
+
     public UnitOfWork(IntegratedProtectionDbContext context)
     {
         _context = context;
@@ -17,6 +20,9 @@ public class UnitOfWork : IUnitOfWork
         Criminals = new CriminalRepository(_context);
         Drivers = new DriverRepository(_context);
         Persons = new PersonRepository(_context);
+        StolenCars = new StolenCarRepository(_context);
+        TrafficOfficers = new TrafficOfficerRepository(_context);
+
     }
     public async ValueTask DisposeAsync() => await _context.DisposeAsync();
 

@@ -33,8 +33,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Number = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Letters = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsStolen = table.Column<bool>(type: "bit", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,11 +91,29 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Governorate = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Religion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified))
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Persons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrafficOfficers",
+                schema: "Traffic",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Center = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MiddelName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrafficOfficers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,11 +150,10 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SSN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
+                    CardPhoto = table.Column<byte[]>(type: "varbinary(max)", maxLength: 4194304, nullable: false),
                     Job = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PersonId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -148,6 +164,33 @@ namespace IntegratedProtection.Infrastructure.Migrations
                         column: x => x.PersonId,
                         principalSchema: "CivilRegistry",
                         principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StolenCars",
+                schema: "Traffic",
+                columns: table => new
+                {
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    TrafficOfficerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StolenCars", x => new { x.CarId, x.TrafficOfficerId });
+                    table.ForeignKey(
+                        name: "FK_StolenCars_Cars_CarId",
+                        column: x => x.CarId,
+                        principalSchema: "Traffic",
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StolenCars_TrafficOfficers_TrafficOfficerId",
+                        column: x => x.TrafficOfficerId,
+                        principalSchema: "Traffic",
+                        principalTable: "TrafficOfficers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -164,6 +207,12 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 schema: "Traffic",
                 table: "CarsDrivers",
                 column: "DriverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StolenCars_TrafficOfficerId",
+                schema: "Traffic",
+                table: "StolenCars",
+                column: "TrafficOfficerId");
         }
 
         /// <inheritdoc />
@@ -182,15 +231,23 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 schema: "CentralSecurity");
 
             migrationBuilder.DropTable(
+                name: "StolenCars",
+                schema: "Traffic");
+
+            migrationBuilder.DropTable(
                 name: "Persons",
                 schema: "CivilRegistry");
+
+            migrationBuilder.DropTable(
+                name: "Drivers",
+                schema: "Traffic");
 
             migrationBuilder.DropTable(
                 name: "Cars",
                 schema: "Traffic");
 
             migrationBuilder.DropTable(
-                name: "Drivers",
+                name: "TrafficOfficers",
                 schema: "Traffic");
         }
     }

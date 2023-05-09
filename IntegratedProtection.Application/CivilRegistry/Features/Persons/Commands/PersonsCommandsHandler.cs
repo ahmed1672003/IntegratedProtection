@@ -40,9 +40,7 @@ public class PutPersonHandler :
     public async Task<Response<GetPersonViewModel>>
         Handle(PutPersonCommand request, CancellationToken cancellationToken)
     {
-        var isModelExist = await _context.Persons.IsExist(e => e.Id.Equals(request.ViewModel.Id));
-
-        if (!isModelExist)
+        if (!await _context.Persons.IsExist(e => e.Id.Equals(request.ViewModel.Id)))
             return NotFound<GetPersonViewModel>("person not found !");
 
         var model = await _context.Persons.GetAsync(e => e.Id.Equals(request.ViewModel.Id));
@@ -110,5 +108,26 @@ public class DeletePersonBySSNHandler :
         return Delete<GetPersonViewModel>("person deleted success !");
     }
 }
+
+public class DeleteAllPersonsHandler :
+    ResponseHandler,
+    IRequestHandler<DeleteAllPersonsCommand, Response<GetPersonViewModel>>
+{
+    public DeleteAllPersonsHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
+    {
+    }
+
+    public async Task<Response<GetPersonViewModel>>
+        Handle(DeleteAllPersonsCommand request, CancellationToken cancellationToken)
+    {
+        if (!await _context.Persons.IsExist())
+            return NotFound<GetPersonViewModel>("no persons founded !");
+
+        await _context.Persons.ExecuteDeleteAsync();
+
+        return Delete<GetPersonViewModel>("Deleted all persons success !");
+    }
+}
+
 #endregion
 #endregion

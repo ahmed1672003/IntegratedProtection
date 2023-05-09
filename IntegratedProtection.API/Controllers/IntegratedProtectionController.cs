@@ -4,13 +4,15 @@ namespace IntegratedProtection.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class IntegratedProtectionController : ControllerBase
+public class IntegratedProtectionController : Controller
 {
     protected readonly IMediator _mediator;
+
 
     public IntegratedProtectionController(IMediator mediator)
     {
         _mediator = mediator;
+
     }
 
     #region Actions

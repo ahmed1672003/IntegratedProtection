@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace IntegratedProtection.Application.CivilRegistry.ViewModels;
+﻿namespace IntegratedProtection.Application.CivilRegistry.ViewModels;
+#region Persons View Models
 public class PostPersonViewModel
 {
     [MaxLength(14)]
@@ -40,7 +38,7 @@ public class PostPersonViewModel
     public string Status { get; set; }
 
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
     public DateTime DateOfBirth { get; set; }
 }
 public class PutPersonViewModel
@@ -116,4 +114,75 @@ public class GetPersonViewModel
 
     public int Age { get; set; }
 }
+#endregion
 
+#region Card View Models
+public class PostCardViewModel
+{
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    [MaxLength(100)]
+    public string Job { get; set; }
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
+    public DateTime CreatedDate { get; set; }
+
+    public int PersonId { get; set; }
+
+    [FromForm]
+    public IFormFile CardFile { get; set; }
+}
+public class PutCardViewModel
+{
+    public int Id { get; set; }
+
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    [MaxLength(100)]
+    public string Job { get; set; }
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
+    public DateTime CreatedDate { get; set; }
+
+    public int PersonId { get; set; }
+
+    [FromForm]
+    public IFormFile CardFile { get; set; }
+
+}
+public class GetCardViewModel
+{
+    public int Id { get; set; }
+
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    //[MaxLength(1024 * 1024 * 4)]
+    //// *********************** \\
+    //public byte[] CardPhoto { get; set; }
+
+    [MaxLength(100)]
+    public string Job { get; set; }
+
+    public string CreatedDate { get; set; }
+
+    public string EndDate { get; set; }
+
+    public int PersonId { get; set; }
+
+    public bool IsValid { get; set; }
+}
+#endregion
+
+#region Person With Card View Model
+public class GetPersonWithCardViewModel
+{
+    public GetPersonViewModel GetPersonViewModel { get; set; }
+    public GetCardViewModel GetCardViewModel { get; set; }
+}
+
+#endregion

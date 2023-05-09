@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230508185915_InitialCreate")]
+    [Migration("20230509022918_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,14 +58,12 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CardPath")
+                    b.Property<byte[]>("CardPhoto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(4194304)
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Job")
@@ -78,7 +76,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<string>("SSN")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.HasKey("Id");
 
@@ -107,9 +106,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -190,9 +187,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsStolen")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Letters")
                         .IsRequired()
                         .HasMaxLength(4)
@@ -252,6 +246,58 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.ToTable("Drivers", "Traffic");
                 });
 
+            modelBuilder.Entity("IntegratedProtection.Core.Traffic.StolenCar", b =>
+                {
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrafficOfficerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarId", "TrafficOfficerId");
+
+                    b.HasIndex("TrafficOfficerId");
+
+                    b.ToTable("StolenCars", "Traffic");
+                });
+
+            modelBuilder.Entity("IntegratedProtection.Core.Traffic.TrafficOfficer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Center")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MiddelName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrafficOfficers", "Traffic");
+                });
+
             modelBuilder.Entity("IntegratedProtection.Core.CivilRegistry.Card", b =>
                 {
                     b.HasOne("IntegratedProtection.Core.CivilRegistry.Person", "Person")
@@ -282,6 +328,25 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Navigation("Driver");
                 });
 
+            modelBuilder.Entity("IntegratedProtection.Core.Traffic.StolenCar", b =>
+                {
+                    b.HasOne("IntegratedProtection.Core.Traffic.Car", "Car")
+                        .WithMany("StolenCars")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IntegratedProtection.Core.Traffic.TrafficOfficer", "TrafficOfficer")
+                        .WithMany("StolenCars")
+                        .HasForeignKey("TrafficOfficerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("TrafficOfficer");
+                });
+
             modelBuilder.Entity("IntegratedProtection.Core.CivilRegistry.Person", b =>
                 {
                     b.Navigation("Card")
@@ -291,11 +356,18 @@ namespace IntegratedProtection.Infrastructure.Migrations
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Car", b =>
                 {
                     b.Navigation("CarDriver");
+
+                    b.Navigation("StolenCars");
                 });
 
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Driver", b =>
                 {
                     b.Navigation("CarDriver");
+                });
+
+            modelBuilder.Entity("IntegratedProtection.Core.Traffic.TrafficOfficer", b =>
+                {
+                    b.Navigation("StolenCars");
                 });
 #pragma warning restore 612, 618
         }
