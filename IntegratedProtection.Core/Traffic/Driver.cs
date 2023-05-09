@@ -32,10 +32,10 @@ public class Driver : Base<int>
                 return false;
         }
     }
-    public ICollection<CarDriver> CarDriver { get; set; }
+    public ICollection<CarDriver> CarsDrivers { get; set; }
     public Driver()
     {
         //CreatedDate = DateTime.Now.Date;
-        CarDriver = new HashSet<CarDriver>();
+        CarsDrivers = new HashSet<CarDriver>();
     }
 }

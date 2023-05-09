@@ -81,4 +81,43 @@ public class GetCarViewModel
 
 #endregion
 
+#region Drivers View Models
+
+public class PostDriverViewModel
+{
+
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
+    public DateTime CreatedDate { get; set; }
+}
+public class PutDriverViewModel
+{
+    public int Id { get; set; }
+
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
+    public DateTime CreatedDate { get; set; }
+}
+
+public class GetDriverViewModel
+{
+    public int Id { get; set; }
+
+    [MaxLength(14)]
+    public string SSN { get; set; }
+
+    public string CreatedDate { get; set; }
+
+    public string EndDate { get; set; }
+
+    public bool IsLicenseValid { get; set; }
+}
+#endregion
+
 

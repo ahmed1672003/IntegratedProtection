@@ -31,6 +31,14 @@ public class IntegratedProtectionMapper : Profile
         GetCarMapper();
         #endregion
 
+        #region Driver Mapping
+        PostDriverMapper();
+        PutDriverMapper();
+        GetDriverMapper();
+        #endregion
+
+
+
         #region CarsDrivers Mapping
 
         #endregion
@@ -61,7 +69,7 @@ public class IntegratedProtectionMapper : Profile
         CreateMap<Person, GetPersonViewModel>()
             .ForMember(dist => dist.DateOfBirth,
           cfg =>
-          cfg.MapFrom(src => src.DateOfBirth.ToString("MMMM dd, yyyy")));
+          cfg.MapFrom(src => src.DateOfBirth.ToShortDateString()));
     }
     #endregion
 
@@ -104,15 +112,38 @@ public class IntegratedProtectionMapper : Profile
         CreateMap<Car, GetCarViewModel>()
         .ForMember(dist => dist.CreatedDate,
         cfg =>
-        cfg.MapFrom(src => src.CreatedDate.ToString("MMMM dd, yyyy")))
+        cfg.MapFrom(src => src.CreatedDate.ToShortDateString()))
         .ForMember(dist => dist.EndDate,
         cfg =>
-        cfg.MapFrom(src => src.EndDate.ToString("MMMM dd, yyyy")));
+        cfg.MapFrom(src => src.EndDate.ToShortDateString()));
     }
     #endregion
 
-    #region CarsDrivers Mapping
+    #region Drivers Mapping
+    public void PostDriverMapper()
+    {
+        CreateMap<PostDriverViewModel, Driver>().ReverseMap();
+    }
 
+    public void PutDriverMapper()
+    {
+        CreateMap<PutDriverViewModel, Driver>().ReverseMap();
+    }
+    public void GetDriverMapper()
+    {
+        CreateMap<Driver, GetDriverViewModel>()
+        .ForMember(dist => dist.CreatedDate,
+            cfg =>
+            cfg.MapFrom(src => src.CreatedDate.ToShortDateString()))
+        .ForMember(dist => dist.EndDate,
+        cfg =>
+        cfg.MapFrom(src => src.EndDate.ToShortDateString()))
+        .ReverseMap();
+
+    }
+    #endregion
+
+    #region Drivers Mapping
     #endregion
 
     #region StolenCars Mapping
