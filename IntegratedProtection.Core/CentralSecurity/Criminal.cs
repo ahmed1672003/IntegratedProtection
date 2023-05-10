@@ -13,5 +13,11 @@ public class Criminal : Base<int>
     [DataType(DataType.Date)]
     public DateTime CreatedData { get; set; }
 
-    public Criminal() => CreatedData = DateTime.Now.Date;
+    public Criminal()
+    {
+        // CreatedData = DateTime.Now.Date;
+
+    }
+
+
 }

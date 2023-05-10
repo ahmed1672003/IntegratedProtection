@@ -1,4 +1,7 @@
-﻿namespace IntegratedProtection.Application.Mapping;
+﻿using IntegratedProtection.Application.CentralSecurity.ViewModels;
+using IntegratedProtection.Core.CentralSecurity;
+
+namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
@@ -20,6 +23,13 @@ public class IntegratedProtectionMapper : Profile
 
         #endregion
 
+        #region Central Security Mapper
+        #region Criminals Mapping
+        PostCriminalMapper();
+        PutCriminalMapper();
+        GetCriminalMapper();
+        #endregion
+        #endregion
 
         #region Traffic Mapper
 
@@ -52,6 +62,8 @@ public class IntegratedProtectionMapper : Profile
         #endregion
 
         #endregion
+
+
     }
 
     #region CivilRegistry Mapper
@@ -190,6 +202,29 @@ public class IntegratedProtectionMapper : Profile
             cfg =>
             cfg.MapFrom(src => src.CreatedData.ToShortDateString()));
     }
+    #endregion
+
+    #endregion
+
+    #region Central Security Mapper
+
+    #region Criminals Mapping
+    public void PostCriminalMapper()
+    {
+        CreateMap<PostCriminalViewModel, Criminal>().ReverseMap();
+    }
+    public void PutCriminalMapper()
+    {
+        CreateMap<PutCriminalViewModel, Criminal>().ReverseMap();
+    }
+    public void GetCriminalMapper()
+    {
+        CreateMap<Criminal, GetCriminalViewModel>()
+            .ForMember(dist => dist.CreatedData,
+            cfg =>
+            cfg.MapFrom(src => src.CreatedData.ToShortDateString()));
+    }
+
     #endregion
 
     #endregion

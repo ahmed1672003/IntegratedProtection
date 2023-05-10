@@ -19,9 +19,4 @@
     <ProjectReference Include="..\IntegratedProtection.Infrastructure\IntegratedProtection.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CentralSecurity\" />
-    <Folder Include="CentralSecurity\Features\" />
-  </ItemGroup>
-
 </Project>

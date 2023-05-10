@@ -1,4 +1,7 @@
 ﻿global using IntegratedProtection.Application;
+global using IntegratedProtection.Application.CentralSecurity.Features.Criminals.Commands;
+global using IntegratedProtection.Application.CentralSecurity.Features.Criminals.Queries;
+global using IntegratedProtection.Application.CentralSecurity.ViewModels;
 global using IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
 global using IntegratedProtection.Application.CivilRegistry.Features.Cards.Queries;
 global using IntegratedProtection.Application.CivilRegistry.ViewModels;
