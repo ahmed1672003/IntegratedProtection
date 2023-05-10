@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace IntegratedProtection.Application.Traffic.Features.CarsDrivers.Commands;
 
-namespace IntegratedProtection.Application.Traffic.Features.CarsDrivers.Commands
-{
-    internal class CarsDriversCommands
-    {
-    }
-}
+public record PostCarDriverCommand(PostCarDriverViewModel ViewModel) : IRequest<Response<GetCarDriverViewModel>>;
+
+
+public record DeleteCarDriverCommand(int? CarId, int? DriverId) : IRequest<Response<GetCarDriverViewModel>>;
+
+public record DeleteAllCarsDriversCommand() : IRequest<Response<GetCarDriverViewModel>>;

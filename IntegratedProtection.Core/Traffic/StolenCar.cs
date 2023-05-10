@@ -5,7 +5,7 @@ PrimaryKey(nameof(CarId), nameof(TrafficOfficerId))]
 public class StolenCar
 {
     [DataType(DataType.Date)]
-    public string CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public int CarId { get; set; }
     public int TrafficOfficerId { get; set; }
@@ -18,7 +18,7 @@ public class StolenCar
 
     public StolenCar()
     {
-        CreatedDate = DateTime.Now.ToShortDateString();
-    }
+        // CreatedDate = DateTime.Now.Date;
 
+    }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230509212124_InitialCreate")]
+    [Migration("20230510134828_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -199,6 +199,11 @@ namespace IntegratedProtection.Infrastructure.Migrations
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
+                    b.Property<string>("OwnerSSN")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cars", "Traffic");
@@ -211,6 +216,9 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedData")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CarId", "DriverId");
 
@@ -248,9 +256,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<int>("TrafficOfficerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CarId", "TrafficOfficerId");
 

@@ -9,6 +9,9 @@ public class Car : Base<int>
     [MaxLength(100)]
     public string Model { get; set; }
 
+    [MaxLength(14)]
+    public string OwnerSSN { get; set; }
+
     [MaxLength(100)]
     public string Company { get; set; }
 

@@ -4,6 +4,8 @@
 #region Cars View Models
 public class PostCarViewModel
 {
+    [MaxLength(14)]
+    public string OwnerSSN { get; set; }
 
     [MaxLength(100)]
     public string Model { get; set; }
@@ -29,6 +31,9 @@ public class PutCarViewModel
 {
     public int Id { get; set; }
 
+    [MaxLength(14)]
+    public string OwnerSSN { get; set; }
+
     [MaxLength(100)]
     public string Model { get; set; }
 
@@ -49,6 +54,7 @@ public class PutCarViewModel
     public DateTime CreatedDate { get; set; }
 
 }
+
 
 public class GetCarViewModel
 {
@@ -169,14 +175,38 @@ public class PostStolenCarViewModel
 {
     public int? CarId { get; set; }
     public int? TrafficOfficerId { get; set; }
+    public DateTime CreatedDate { get; set; }
 }
 
 
 public class GetStolenCarViewModel
 {
-    public GetCarViewModel CarViewModel { get; set; }
-    public GetTrafficOfficerViewModel TrafficOfficerViewModel { get; set; }
+    public int? CarId { get; set; }
+    public int? TrafficOfficerId { get; set; }
+
+    public string CreatedDate { get; set; }
 }
+#endregion
+
+#region Cars Drivers View Models
+public class PostCarDriverViewModel
+{
+    public int? CarId { get; set; }
+
+    public int? DriverId { get; set; }
+
+    public DateTime CreatedData { get; set; }
+}
+
+public class GetCarDriverViewModel
+{
+    public int CarId { get; set; }
+
+    public int DriverId { get; set; }
+
+    public string CreatedData { get; set; }
+}
+
 #endregion
 
 

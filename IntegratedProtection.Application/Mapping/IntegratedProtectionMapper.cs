@@ -1,6 +1,4 @@
-﻿
-
-namespace IntegratedProtection.Application.Mapping;
+﻿namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
@@ -43,13 +41,14 @@ public class IntegratedProtectionMapper : Profile
         GetTrafficOfficerMapper();
         #endregion
 
-
         #region StolenCars Mapping
-        StolenCarMapper();
+        PostStolenCarMapper();
+        GetStolenCarMapper();
         #endregion
 
         #region CarsDrivers Mapping
-
+        PostCarDriverMapper();
+        GetCarDriverMapper();
         #endregion
 
         #endregion
@@ -164,11 +163,33 @@ public class IntegratedProtectionMapper : Profile
     #endregion
 
     #region StolenCars Mapping
-    public void StolenCarMapper()
+    public void PostStolenCarMapper()
     {
-        CreateMap<PostStolenCarViewModel, StolenCar>();
+        CreateMap<PostStolenCarViewModel, StolenCar>().ReverseMap();
+    }
+    public void GetStolenCarMapper()
+    {
+        CreateMap<StolenCar, GetStolenCarViewModel>()
+            .ForMember(dist => dist.CreatedDate,
+            cfg =>
+            cfg.MapFrom(src => src.CreatedDate.ToShortDateString()));
     }
 
+    #endregion
+
+    #region Cars Drivers
+    public void PostCarDriverMapper()
+    {
+        CreateMap<PostCarDriverViewModel, CarDriver>().ReverseMap();
+    }
+
+    public void GetCarDriverMapper()
+    {
+        CreateMap<CarDriver, GetCarDriverViewModel>()
+            .ForMember(dist => dist.CreatedData,
+            cfg =>
+            cfg.MapFrom(src => src.CreatedData.ToShortDateString()));
+    }
     #endregion
 
     #endregion
