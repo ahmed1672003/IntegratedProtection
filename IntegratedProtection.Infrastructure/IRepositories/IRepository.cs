@@ -1,4 +1,5 @@
-﻿namespace IntegratedProtection.Infrastructure.IRepositories;
+﻿
+namespace IntegratedProtection.Infrastructure.IRepositories;
 public interface IRepository<TEntity> where TEntity : class
 {
     Task<TEntity> AddAsync(TEntity entity);
@@ -28,4 +29,9 @@ public interface IRepository<TEntity> where TEntity : class
         Func<TEntity, object> propertyExpression,
         Expression<Func<TEntity, bool>> filter = null);
     Task ExecuteDeleteAsync(Expression<Func<TEntity, bool>> filter = null);
+
+    Task<IQueryable<ReferenceEntry>> GetReferences(TEntity entity);
+
+    Task<ReferenceEntry<TEntity, object>> GetReference(TEntity entity, Expression<Func<TEntity, object>> property);
+
 }

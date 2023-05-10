@@ -1,6 +1,4 @@
-﻿using IntegratedProtection.Infrastructure.Helpers;
-
-namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Commands;
+﻿namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Commands;
 
 #region Post
 
@@ -16,7 +14,7 @@ public class PostStolenCarHandler :
         Handle(PostStolenCarCommand request, CancellationToken cancellationToken)
     {
         if (request.ViewModel.CarId.Equals(null) || request.ViewModel.TrafficOfficerId.Equals(null))
-            return BadRequest<GetStolenCarViewModel>("carId & traffic officerId are required !");
+            return BadRequest<GetStolenCarViewModel>("carId & trafficOfficerId are required !");
 
         var model = _mapper.Map<StolenCar>(request.ViewModel);
 
@@ -31,8 +29,15 @@ public class PostStolenCarHandler :
         }
 
         var stolenCarModel = await _context.StolenCars.GetAsync(
-            s => s.CarId.Equals(request.ViewModel.CarId),
-            new string[] { Include.Car, Include.TrafficOfficer });
+            s =>
+            s.CarId.Equals(request.ViewModel.CarId) && s.TrafficOfficerId.Equals(request.ViewModel.TrafficOfficerId));
+
+
+        var references = await _context.StolenCars.GetReferences(stolenCarModel);
+
+        foreach (var reference in references)
+            await reference.LoadAsync();
+
 
         return Created(new GetStolenCarViewModel()
         {

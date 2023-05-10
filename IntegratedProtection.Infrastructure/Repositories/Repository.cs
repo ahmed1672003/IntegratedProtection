@@ -2,7 +2,7 @@
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    private readonly IntegratedProtectionDbContext _context;
+    protected readonly IntegratedProtectionDbContext _context;
 
     protected readonly DbSet<TEntity> _entities;
 
@@ -53,7 +53,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         Expression<Func<TEntity, bool>> filter,
         string[] includes = null)
     {
-        IQueryable<TEntity> entities = _entities.AsNoTracking().Where(filter);
+        IQueryable<TEntity> entities = _entities.Where(filter);
 
         if (includes is not null)
             foreach (var include in includes)
@@ -79,6 +79,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         else
             return await _entities.AnyAsync(filter);
     }
+
+    public virtual async Task<IQueryable<ReferenceEntry>> GetReferences(TEntity entity) =>
+    await Task.FromResult(_entities.Entry(entity).References.AsQueryable());
+
+    public async Task<ReferenceEntry<TEntity, object>>
+        GetReference(TEntity entity, Expression<Func<TEntity, object>> propertyExpression) =>
+        await Task.FromResult(_entities.Entry(entity).Reference(propertyExpression));
+
     #endregion
 
     #region Commands
