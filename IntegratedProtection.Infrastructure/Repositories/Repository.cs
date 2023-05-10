@@ -83,7 +83,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     public virtual async Task<IQueryable<ReferenceEntry>> GetReferences(TEntity entity) =>
     await Task.FromResult(_entities.Entry(entity).References.AsQueryable());
 
-    public async Task<ReferenceEntry<TEntity, object>>
+    public virtual async Task<ReferenceEntry<TEntity, object>>
         GetReference(TEntity entity, Expression<Func<TEntity, object>> propertyExpression) =>
         await Task.FromResult(_entities.Entry(entity).Reference(propertyExpression));
 
