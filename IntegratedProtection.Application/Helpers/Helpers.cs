@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
+﻿using Microsoft.AspNetCore.Http.Internal;
 
 namespace IntegratedProtection.Application.Helpers;
 public static class FileValidator

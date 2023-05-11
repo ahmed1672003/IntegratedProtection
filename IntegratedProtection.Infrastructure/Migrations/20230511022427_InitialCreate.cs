@@ -151,7 +151,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    CardPhoto = table.Column<byte[]>(type: "varbinary(max)", maxLength: 4194304, nullable: false),
+                    CardPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Job = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PersonId = table.Column<int>(type: "int", nullable: false)

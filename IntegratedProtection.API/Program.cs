@@ -1,3 +1,6 @@
+using IntegratedProtection.API.Helpers;
+using IntegratedProtection.Application.IHelpers;
+
 namespace IntegratedProtection.API;
 public class Program
 {
@@ -13,6 +16,8 @@ public class Program
         builder.Services
                 .RegisterApplicationDependencies()
                 .RegisterInfrastructureDependencies(builder.Configuration);
+
+        builder.Services.AddTransient(typeof(IFileHelper<>), typeof(FilesHelper<>));
         #endregion
 
         #region Enable Cors Policy

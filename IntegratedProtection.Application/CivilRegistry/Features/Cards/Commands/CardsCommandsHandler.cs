@@ -1,24 +1,31 @@
-﻿namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
+﻿using IntegratedProtection.Application.IHelpers;
+
+namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
 #region Post Card Handler
 public class PostCardHandler :
     ResponseHandler,
     IRequestHandler<PostCardCommand, Response<GetCardViewModel>>
 {
-    public PostCardHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
+    private readonly IFileHelper<Card> _filesHelper;
+
+    public PostCardHandler(IUnitOfWork context, IMapper mapper, IFileHelper<Card> filesHelper) : base(context, mapper)
     {
+        _filesHelper = filesHelper;
     }
 
     public async Task<Response<GetCardViewModel>>
         Handle(PostCardCommand request, CancellationToken cancellationToken)
     {
 
-        var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
+        //var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
 
-        if (!imageWithStatus.Value)
-            return BadRequest<GetCardViewModel>("{.jpg,.png .jpeg } & {Max size is 1 MB} only are allowed !");
+        //if (!imageWithStatus.Value)
+        //    return BadRequest<GetCardViewModel>("{.jpg,.png .jpeg } & {Max size is 1 MB} only are allowed !");
 
         var model = _mapper.Map<Card>(request.ViewModel);
-        model.CardPhoto = imageWithStatus.Key;
+        //model.CardPhoto = imageWithStatus.Key;
+
+        model.CardPhotoPath = await _filesHelper.ToStore(request.ViewModel.CardFile);
 
         var resultModel = await _context.Cards.AddAsync(model);
 
@@ -56,13 +63,14 @@ public class PutCardHandler :
         if (!await _context.Persons.IsExist(p => p.Id.Equals(request.ViewModel.PersonId)))
             return NotFound<GetCardViewModel>($"person with this id {request.ViewModel.PersonId} not found");
 
-        var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
+        //var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
 
-        if (!imageWithStatus.Value)
-            return BadRequest<GetCardViewModel>("{ .jpg ,.png , .jpeg } & { Max size is 4 MB } only are allowed !");
+        //if (!imageWithStatus.Value)
+        //    return BadRequest<GetCardViewModel>("{ .jpg ,.png , .jpeg } & { Max size is 4 MB } only are allowed !");
 
         var model = _mapper.Map<Card>(request.ViewModel);
-        model.CardPhoto = imageWithStatus.Key;
+        //model.CardPhoto = imageWithStatus.Key;
+        //model.CardPhotoPath = 
 
         var resultModel = await _context.Cards.UpdateAsync(model);
 
@@ -90,6 +98,7 @@ public class DeleteCardByIdHandler :
 {
     public DeleteCardByIdHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
     {
+
     }
 
     public async Task<Response<GetCardViewModel>>

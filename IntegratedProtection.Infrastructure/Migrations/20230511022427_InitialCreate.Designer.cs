@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230510134828_InitialCreate")]
+    [Migration("20230511022427_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,10 +58,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("CardPhoto")
-                        .IsRequired()
-                        .HasMaxLength(4194304)
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("CardPhotoPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

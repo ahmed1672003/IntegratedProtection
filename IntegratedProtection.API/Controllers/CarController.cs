@@ -6,6 +6,8 @@ namespace IntegratedProtection.API.Controllers;
 [ApiController]
 public class CarController : IntegratedProtectionController
 {
+    private readonly IWebHostEnvironment _webHostEnvironment;
+
     public CarController(IMediator mediator) : base(mediator)
     {
     }
@@ -16,9 +18,7 @@ public class CarController : IntegratedProtectionController
     public async Task<IActionResult> CreateCar([FromForm] PostCarViewModel viewModel)
     {
         var response = await _mediator.Send(new PostCarCommand(viewModel));
-
         return NewResult(response);
-
     }
     #endregion
 
@@ -38,6 +38,7 @@ public class CarController : IntegratedProtectionController
     public async Task<IActionResult> GetAll()
     {
         var response = await _mediator.Send(new GetAllCarsQuery());
+
         return NewResult(response);
     }
 
@@ -87,5 +88,4 @@ public class CarController : IntegratedProtectionController
         return NewResult(response);
     }
     #endregion
-
 }

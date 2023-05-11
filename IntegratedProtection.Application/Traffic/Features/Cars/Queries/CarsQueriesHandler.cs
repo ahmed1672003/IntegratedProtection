@@ -55,6 +55,8 @@ public class GetAllCarsHandler :
     ResponseHandler,
     IRequestHandler<GetAllCarsQuery, Response<IEnumerable<GetCarViewModel>>>
 {
+
+
     public GetAllCarsHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
     {
     }

@@ -18,6 +18,4 @@ public class Criminal : Base<int>
         // CreatedData = DateTime.Now.Date;
 
     }
-
-
 }

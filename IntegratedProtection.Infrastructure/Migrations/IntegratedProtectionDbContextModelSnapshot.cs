@@ -55,10 +55,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("CardPhoto")
-                        .IsRequired()
-                        .HasMaxLength(4194304)
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("CardPhotoPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

@@ -1,4 +1,6 @@
-﻿namespace IntegratedProtection.Core.CivilRegistry;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace IntegratedProtection.Core.CivilRegistry;
 
 [Table("Cards", Schema = "CivilRegistry"), PrimaryKey(nameof(Id))]
 public class Card : Base<int>
@@ -9,8 +11,10 @@ public class Card : Base<int>
     [MaxLength(14)]
     public string SSN { get; set; }
 
-    [MaxLength(1024 * 1024 * 4)]
-    public byte[] CardPhoto { get; set; }
+
+    [AllowNull]
+    public string? CardPhotoPath { get; set; } = null!;
+
 
     [MaxLength(100)]
     public string Job { get; set; }
