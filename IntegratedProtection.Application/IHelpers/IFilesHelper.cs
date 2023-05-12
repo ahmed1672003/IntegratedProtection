@@ -1,6 +1,7 @@
 ﻿namespace IntegratedProtection.Application.IHelpers;
 
-public interface IFileHelper<TEntity> where TEntity : class
+public interface IFileHelper
 {
-    Task<string> ToStore(IFormFile file);
+    bool IsValidFile(byte[] target, IFormFile file);
+    Task<byte[]> ToByteArray(IFormFile file);
 }

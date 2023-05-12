@@ -3,7 +3,7 @@ using IntegratedProtection.Application.IHelpers;
 
 namespace IntegratedProtection.API.Helpers;
 
-public class FilesHelper<TEntity> : IFileHelper<TEntity> where TEntity : class
+public class FilesHelper : IFileHelper
 {
     private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -12,26 +12,23 @@ public class FilesHelper<TEntity> : IFileHelper<TEntity> where TEntity : class
         _webHostEnvironment = webHostEnvironment;
     }
 
-    public async Task<string> ToStore(IFormFile file)
+    public async Task<byte[]> ToByteArray(IFormFile file)
     {
-        string s = _webHostEnvironment.WebRootPath + "/" + "images";
-        string folderPath = Path.Combine(s, $"{typeof(TEntity).Name}");
+        using var memoryStream = new MemoryStream();
 
-        if (!Directory.Exists(folderPath))
-            Directory.CreateDirectory(folderPath);
+        await file.CopyToAsync(memoryStream);
 
-        string filePath = string.Concat(folderPath, Guid.NewGuid().ToString(), "_", file.FileName);
-
-        using var fileStream = new FileStream(filePath, FileMode.Create);
-
-        await file.CopyToAsync(fileStream);
-
-        return filePath;
+        return memoryStream.ToArray();
     }
 
-    public void DeleteFile(string path)
+    public bool IsValidFile(byte[] target, IFormFile file)
     {
-        File.Delete(path);
+        var allowedExtensions = new string[] { ".jpg", ".png", ".jpeg" };
+        var allowedSize = 1024 * 1024 * 5;
+        return
+            allowedExtensions.Contains(Path.GetExtension(file.FileName))
+            &&
+            allowedSize >= target.Length;
     }
 
 }

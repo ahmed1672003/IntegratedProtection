@@ -1,4 +1,5 @@
-﻿using IntegratedProtection.Infrastructure.Helpers;
+﻿
+
 
 namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Queries;
 
@@ -13,7 +14,6 @@ public class GetAllCardsHandler :
     public async Task<Response<IEnumerable<GetCardViewModel>>>
         Handle(GetAllCardsQuery request, CancellationToken cancellationToken)
     {
-
         if (!await _context.Cards.IsExist())
             return NotFound<IEnumerable<GetCardViewModel>>("no cards founded !");
 

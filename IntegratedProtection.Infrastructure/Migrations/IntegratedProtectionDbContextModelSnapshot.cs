@@ -55,8 +55,9 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CardPhotoPath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("CardPhoto")
+                        .HasMaxLength(5242880)
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -127,6 +128,10 @@ namespace IntegratedProtection.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte[]>("PersonalPhoto")
+                        .HasMaxLength(4198400)
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Religion")
                         .IsRequired()

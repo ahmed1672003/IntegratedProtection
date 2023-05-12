@@ -1,7 +1,4 @@
-﻿using IntegratedProtection.Application.CentralSecurity.ViewModels;
-using IntegratedProtection.Core.CentralSecurity;
-
-namespace IntegratedProtection.Application.Mapping;
+﻿namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
@@ -24,11 +21,13 @@ public class IntegratedProtectionMapper : Profile
         #endregion
 
         #region Central Security Mapper
+
         #region Criminals Mapping
         PostCriminalMapper();
         PutCriminalMapper();
         GetCriminalMapper();
         #endregion
+
         #endregion
 
         #region Traffic Mapper
@@ -80,9 +79,15 @@ public class IntegratedProtectionMapper : Profile
     public void GetPersonMapper()
     {
         CreateMap<Person, GetPersonViewModel>()
-            .ForMember(dist => dist.DateOfBirth,
+
+        .ForMember(dist => dist.DateOfBirth,
           cfg =>
-          cfg.MapFrom(src => src.DateOfBirth.ToShortDateString()));
+        cfg.MapFrom(src => src.DateOfBirth.ToShortDateString()))
+
+        .ForMember(dist => dist.PersonPhotoBase64,
+        cfg =>
+        cfg.MapFrom(src => Convert.ToBase64String(src.PersonalPhoto)))
+        .ReverseMap();
     }
     #endregion
 
@@ -100,11 +105,16 @@ public class IntegratedProtectionMapper : Profile
         CreateMap<Card, GetCardViewModel>()
             .ForMember(dist => dist.CreatedDate,
             cfg =>
-            cfg.MapFrom(src => src.CreatedDate.ToString("MMM dd,yyyy")))
+            cfg.MapFrom(src => src.CreatedDate.ToShortDateString()))
 
             .ForMember(dist => dist.EndDate,
             cfg =>
-            cfg.MapFrom(src => src.EndDate.ToString("MMM dd,yyyy"))).ReverseMap();
+            cfg.MapFrom(src => src.EndDate.ToShortDateString()))
+
+            .ForMember(dist => dist.CardPhotoBase64,
+            cfg =>
+            cfg.MapFrom(src => Convert.ToBase64String(src.CardPhoto)))
+            .ReverseMap();
     }
     #endregion
 

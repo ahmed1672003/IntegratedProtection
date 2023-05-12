@@ -17,7 +17,7 @@ public class Program
                 .RegisterApplicationDependencies()
                 .RegisterInfrastructureDependencies(builder.Configuration);
 
-        builder.Services.AddTransient(typeof(IFileHelper<>), typeof(FilesHelper<>));
+        builder.Services.AddTransient(typeof(IFileHelper), typeof(FilesHelper));
         #endregion
 
         #region Enable Cors Policy

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace IntegratedProtection.Core.CivilRegistry;
+﻿namespace IntegratedProtection.Core.CivilRegistry;
 
 [Table("Cards", Schema = "CivilRegistry"), PrimaryKey(nameof(Id))]
 public class Card : Base<int>
@@ -11,9 +9,8 @@ public class Card : Base<int>
     [MaxLength(14)]
     public string SSN { get; set; }
 
-
-    [AllowNull]
-    public string? CardPhotoPath { get; set; } = null!;
+    [MaxLength(1024 * 1024 * 5)]
+    public byte[]? CardPhoto { get; set; }
 
 
     [MaxLength(100)]

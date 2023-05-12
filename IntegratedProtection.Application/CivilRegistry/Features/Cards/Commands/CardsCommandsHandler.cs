@@ -1,14 +1,13 @@
-﻿using IntegratedProtection.Application.IHelpers;
+﻿namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
 
-namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
 #region Post Card Handler
 public class PostCardHandler :
     ResponseHandler,
     IRequestHandler<PostCardCommand, Response<GetCardViewModel>>
 {
-    private readonly IFileHelper<Card> _filesHelper;
+    private readonly IFileHelper _filesHelper;
 
-    public PostCardHandler(IUnitOfWork context, IMapper mapper, IFileHelper<Card> filesHelper) : base(context, mapper)
+    public PostCardHandler(IUnitOfWork context, IMapper mapper, IFileHelper filesHelper) : base(context, mapper)
     {
         _filesHelper = filesHelper;
     }
@@ -16,16 +15,15 @@ public class PostCardHandler :
     public async Task<Response<GetCardViewModel>>
         Handle(PostCardCommand request, CancellationToken cancellationToken)
     {
+        var cardPhoto = await _filesHelper.ToByteArray(request.ViewModel.CardPhotoFile);
 
-        //var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
-
-        //if (!imageWithStatus.Value)
-        //    return BadRequest<GetCardViewModel>("{.jpg,.png .jpeg } & {Max size is 1 MB} only are allowed !");
+        if (!_filesHelper.IsValidFile(cardPhoto, request.ViewModel.CardPhotoFile))
+            return BadRequest<GetCardViewModel>
+                ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
 
         var model = _mapper.Map<Card>(request.ViewModel);
-        //model.CardPhoto = imageWithStatus.Key;
+        model.CardPhoto = cardPhoto;
 
-        model.CardPhotoPath = await _filesHelper.ToStore(request.ViewModel.CardFile);
 
         var resultModel = await _context.Cards.AddAsync(model);
 
@@ -50,27 +48,29 @@ public class PutCardHandler :
     ResponseHandler,
     IRequestHandler<PutCardCommand, Response<GetCardViewModel>>
 {
-    public PutCardHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
+    private readonly IFileHelper _filesHelper;
+    public PutCardHandler(IUnitOfWork context, IMapper mapper, IFileHelper fileHelper) : base(context, mapper)
     {
+        _filesHelper = fileHelper;
     }
 
     public async Task<Response<GetCardViewModel>>
         Handle(PutCardCommand request, CancellationToken cancellationToken)
     {
+        var cardPhoto = await _filesHelper.ToByteArray(request.ViewModel.CardPhotoFile);
+
+        if (!_filesHelper.IsValidFile(cardPhoto, request.ViewModel.CardPhotoFile))
+            return BadRequest<GetCardViewModel>
+                ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
+
         if (!await _context.Cards.IsExist(c => c.Id.Equals(request.ViewModel.Id)))
             return NotFound<GetCardViewModel>("card with this id not found !");
 
         if (!await _context.Persons.IsExist(p => p.Id.Equals(request.ViewModel.PersonId)))
             return NotFound<GetCardViewModel>($"person with this id {request.ViewModel.PersonId} not found");
 
-        //var imageWithStatus = await request.ViewModel.CardFile.ToByteArray();
-
-        //if (!imageWithStatus.Value)
-        //    return BadRequest<GetCardViewModel>("{ .jpg ,.png , .jpeg } & { Max size is 4 MB } only are allowed !");
-
         var model = _mapper.Map<Card>(request.ViewModel);
-        //model.CardPhoto = imageWithStatus.Key;
-        //model.CardPhotoPath = 
+        model.CardPhoto = cardPhoto;
 
         var resultModel = await _context.Cards.UpdateAsync(model);
 

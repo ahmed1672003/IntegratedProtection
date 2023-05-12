@@ -6,7 +6,3 @@ public record DeletePersonByIdCommand(int Id) : IRequest<Response<GetPersonViewM
 public record DeletePersonBySSNCommand(string SSN) : IRequest<Response<GetPersonViewModel>>;
 public record DeleteAllPersonsCommand() : IRequest<Response<GetPersonViewModel>>;
 
-
-
-
-
