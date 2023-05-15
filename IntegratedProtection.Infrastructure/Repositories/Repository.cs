@@ -53,7 +53,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         Expression<Func<TEntity, bool>> filter,
         string[] includes = null)
     {
-        IQueryable<TEntity> entities = _entities.Where(filter);
+        IQueryable<TEntity> entities = _entities.AsNoTracking().Where(filter);
 
         if (includes is not null)
             foreach (var include in includes)

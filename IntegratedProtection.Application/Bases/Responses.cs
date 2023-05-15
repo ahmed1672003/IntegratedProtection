@@ -80,6 +80,7 @@ public class ResponseHandler : Handler
     };
     public Response<TData> Accepted<TData>(TData data, string message = null, object meta = null) => new()
     {
+        StatusCode = HttpStatusCode.Accepted,
         Data = data,
         Succeeded = true,
         Message = "Operation Success",
