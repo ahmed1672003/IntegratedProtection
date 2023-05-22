@@ -6,4 +6,40 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<button id="get-car-data" class="btn btn-lg btn-outline-primary">
+    GetData
+</button>
+
+@section Scripts{ 
+   <script>
+       $(document).ready(function () {
+           $("#get-car-data").on("click", function () {
+               $.ajax({
+                   method: "GET",
+                   url: "https://localhost:44382/api/IntegratedProtectionServices/CarData?numbers=11&letters=11",
+                   contentType: 'application/json; charset=UTF-8',
+                   success: function (data) {
+                       console.log(data);
+                   },
+                   error: function () {
+                       console.log("failed !")
+                   }
+               })
+               $.ajax({
+                   method: "GET",
+                   url: 'https://localhost:44382/api/IntegratedProtectionServices/PersonData?SSN=11', 
+                       contentType: 'application/json; charset=UTF-8',
+                   success: function (data) {
+                       console.log(data)
+                   },
+                   error: function () {
+                       console.log("failed !")
+                   }
+               })
+
+           });
+           
+       });
+   </script>
+}
 
