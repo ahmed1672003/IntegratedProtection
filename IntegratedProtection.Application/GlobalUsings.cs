@@ -3,6 +3,7 @@ global using IntegratedProtection.Application.Bases;
 global using IntegratedProtection.Application.CentralSecurity.ViewModels;
 global using IntegratedProtection.Application.CivilRegistry.ViewModels;
 global using IntegratedProtection.Application.IHelpers;
+global using IntegratedProtection.Application.IntegratedProtection.ViewModels;
 global using IntegratedProtection.Application.Traffic.ViewModels;
 global using IntegratedProtection.Core.CentralSecurity;
 global using IntegratedProtection.Core.CivilRegistry;

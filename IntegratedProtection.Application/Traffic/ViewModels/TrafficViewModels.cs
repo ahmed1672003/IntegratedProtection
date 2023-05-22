@@ -183,7 +183,6 @@ public class GetStolenCarViewModel
 {
     public int? CarId { get; set; }
     public int? TrafficOfficerId { get; set; }
-
     public string CreatedDate { get; set; }
 }
 #endregion

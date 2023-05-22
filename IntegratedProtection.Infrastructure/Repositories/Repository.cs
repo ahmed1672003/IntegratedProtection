@@ -4,7 +4,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
     protected readonly IntegratedProtectionDbContext _context;
 
-    protected readonly DbSet<TEntity> _entities;
+    protected DbSet<TEntity> _entities;
 
     public Repository(IntegratedProtectionDbContext context)
     {

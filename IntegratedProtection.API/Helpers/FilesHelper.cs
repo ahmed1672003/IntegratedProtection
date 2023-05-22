@@ -30,5 +30,4 @@ public class FilesHelper : IFileHelper
             &&
             allowedSize >= target.Length;
     }
-
 }

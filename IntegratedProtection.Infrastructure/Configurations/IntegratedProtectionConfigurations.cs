@@ -60,6 +60,7 @@ public class TrafficOfficerConfigurations : IEntityTypeConfiguration<TrafficOffi
 {
     public void Configure(EntityTypeBuilder<TrafficOfficer> builder)
     {
+      
     }
 }
 #endregion

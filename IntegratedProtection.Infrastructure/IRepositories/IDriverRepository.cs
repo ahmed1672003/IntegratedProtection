@@ -2,4 +2,5 @@
 
 public interface IDriverRepository : IRepository<Driver>
 {
+    Task<Driver> GetRelatedDataAsync(int id);
 }

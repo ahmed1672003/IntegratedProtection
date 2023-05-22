@@ -2,4 +2,5 @@
 
 public interface IPersonRepository : IRepository<Person>
 {
+    Task<Person> GetRelatedDataAsync(int id);
 }
