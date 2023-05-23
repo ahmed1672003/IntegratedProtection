@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.CarsDrivers.Commands;
 #region POST
-public class PostCarDriverHandler :
+public sealed class PostCarDriverHandler :
     ResponseHandler,
     IRequestHandler<PostCarDriverCommand, Response<GetCarDriverViewModel>>
 {
@@ -34,9 +34,7 @@ public class PostCarDriverHandler :
 
 
 #region Delete
-
-
-public class DeleteCarDriverHandler :
+public sealed class DeleteCarDriverHandler :
     ResponseHandler,
     IRequestHandler<DeleteCarDriverCommand, Response<GetCarDriverViewModel>>
 {
@@ -73,7 +71,7 @@ public class DeleteCarDriverHandler :
     }
 }
 
-public class DeleteAllCarsDriversHandler :
+public sealed class DeleteAllCarsDriversHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllCarsDriversCommand, Response<GetCarDriverViewModel>>
 {

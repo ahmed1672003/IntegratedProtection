@@ -3,7 +3,7 @@
 
 namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Queries;
 
-public class GetAllCardsHandler :
+public sealed class GetAllCardsHandler :
     ResponseHandler,
     IRequestHandler<GetAllCardsQuery, Response<IEnumerable<GetCardViewModel>>>
 {
@@ -22,7 +22,7 @@ public class GetAllCardsHandler :
         return Success(viewModels);
     }
 }
-public class GetCardByIdHandler :
+public sealed class GetCardByIdHandler :
     ResponseHandler,
     IRequestHandler<GetCardByIdQuery, Response<GetCardViewModel>>
 {
@@ -43,7 +43,7 @@ public class GetCardByIdHandler :
         return Success(resultViewModel);
     }
 }
-public class GetCardBySSNHandler :
+public sealed class GetCardBySSNHandler :
     ResponseHandler,
     IRequestHandler<GetCardBySSNQuery, Response<GetCardViewModel>>
 {
@@ -64,7 +64,7 @@ public class GetCardBySSNHandler :
         return Success(resultViewModel);
     }
 }
-public class GetCardByIdWithPersonHandler :
+public sealed class GetCardByIdWithPersonHandler :
     ResponseHandler,
     IRequestHandler<GetCardByIdWithPersonQuery, Response<GetPersonWithCardViewModel>>
 {
@@ -103,7 +103,7 @@ public class GetCardByIdWithPersonHandler :
         }, message: "person with card retrieved successfully !");
     }
 }
-public class GetCardBySSNWithPersonHandler :
+public sealed class GetCardBySSNWithPersonHandler :
     ResponseHandler,
     IRequestHandler<GetCardBySSNWithPersonQuery, Response<GetPersonWithCardViewModel>>
 

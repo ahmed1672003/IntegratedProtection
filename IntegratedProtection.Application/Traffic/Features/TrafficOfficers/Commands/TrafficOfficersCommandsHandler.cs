@@ -1,7 +1,7 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.TrafficOfficers.Commands;
 
 #region Post TrafficOfficer Handler
-public class PostTrafficOfficerHandler :
+public sealed class PostTrafficOfficerHandler :
     ResponseHandler,
     IRequestHandler<PostTrafficOfficerCommand, Response<GetTrafficOfficerViewModel>>
 {
@@ -36,7 +36,7 @@ public class PostTrafficOfficerHandler :
 #endregion
 
 #region Put TrafficOfficer Handler
-public class PutTrafficOfficerHandler :
+public sealed class PutTrafficOfficerHandler :
     ResponseHandler,
     IRequestHandler<PutTrafficOfficerCommand, Response<GetTrafficOfficerViewModel>>
 {
@@ -75,7 +75,7 @@ public class PutTrafficOfficerHandler :
 #endregion
 
 #region Delete TrafficOfficer Handler
-public class DeleteTrafficOfficerByIdHandler :
+public sealed class DeleteTrafficOfficerByIdHandler :
     ResponseHandler,
     IRequestHandler<DeleteTrafficOfficerByIdCommand, Response<GetTrafficOfficerViewModel>>
 {
@@ -108,7 +108,7 @@ public class DeleteTrafficOfficerByIdHandler :
     }
 }
 
-public class DeleteAllTrafficOfficersHandler :
+public sealed class DeleteAllTrafficOfficersHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllTrafficOfficersCommand, Response<GetTrafficOfficerViewModel>>
 {

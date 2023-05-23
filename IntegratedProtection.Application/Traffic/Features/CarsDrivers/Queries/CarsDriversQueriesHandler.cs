@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.CarsDrivers.Queries;
 
-public class GetAllCarsDriversHandler :
+public sealed class GetAllCarsDriversHandler :
     ResponseHandler,
     IRequestHandler<GetAllCarsDriversQuery, Response<IEnumerable<GetCarDriverViewModel>>>
 {

@@ -2,8 +2,7 @@
 namespace IntegratedProtection.Application.Traffic.Features.Drivers.Commands;
 
 #region Post Driver Handlers
-
-public class PostDriverHandler :
+public sealed class PostDriverHandler :
     ResponseHandler,
     IRequestHandler<PostDriverCommand, Response<GetDriverViewModel>>
 {
@@ -37,7 +36,7 @@ public class PostDriverHandler :
 #endregion
 
 #region Put Driver Handlers
-public class PutDriverHandler :
+public sealed class PutDriverHandler :
     ResponseHandler,
     IRequestHandler<PutDriverCommand, Response<GetDriverViewModel>>
 {
@@ -72,7 +71,7 @@ public class PutDriverHandler :
 #endregion
 
 #region Delete Driver Handlers
-public class DeleteDriverByIdHandler :
+public sealed class DeleteDriverByIdHandler :
     ResponseHandler,
     IRequestHandler<DeleteDriverByIdCommand, Response<GetDriverViewModel>>
 {
@@ -102,7 +101,7 @@ public class DeleteDriverByIdHandler :
     }
 }
 
-public class DeleteDriverBySSNHandler :
+public sealed class DeleteDriverBySSNHandler :
     ResponseHandler,
     IRequestHandler<DeleteDriverBySSNCommand, Response<GetDriverViewModel>>
 {
@@ -132,7 +131,7 @@ public class DeleteDriverBySSNHandler :
     }
 }
 
-public class DeleteAllDriversHandler :
+public sealed class DeleteAllDriversHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllDriversCommand, Response<GetDriverViewModel>>
 {

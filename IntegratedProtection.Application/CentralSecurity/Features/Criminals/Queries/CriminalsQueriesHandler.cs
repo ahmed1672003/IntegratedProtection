@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.CentralSecurity.Features.Criminals.Queries;
 
-public class GetCriminalByIdHandler :
+public sealed class GetCriminalByIdHandler :
     ResponseHandler,
     IRequestHandler<GetCriminalByIdQuery, Response<GetCriminalViewModel>>
 {
@@ -23,7 +23,7 @@ public class GetCriminalByIdHandler :
     }
 }
 
-public class GetCriminalBySSNHandler :
+public sealed class GetCriminalBySSNHandler :
     ResponseHandler,
     IRequestHandler<GetCriminalBySSNQuery, Response<GetCriminalViewModel>>
 {
@@ -46,7 +46,7 @@ public class GetCriminalBySSNHandler :
     }
 }
 
-public class GetAllCriminalsHandler :
+public sealed class GetAllCriminalsHandler :
     ResponseHandler,
     IRequestHandler<GetAllCriminalsQuery, Response<IEnumerable<GetCriminalViewModel>>>
 {

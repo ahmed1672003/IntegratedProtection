@@ -1,7 +1,7 @@
 ﻿namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Commands;
 
 #region Post Card Handler
-public class PostCardHandler :
+public sealed class PostCardHandler :
     ResponseHandler,
     IRequestHandler<PostCardCommand, Response<GetCardViewModel>>
 {
@@ -44,7 +44,7 @@ public class PostCardHandler :
 #endregion
 
 #region Put Card Handler
-public class PutCardHandler :
+public sealed class PutCardHandler :
     ResponseHandler,
     IRequestHandler<PutCardCommand, Response<GetCardViewModel>>
 {
@@ -92,7 +92,7 @@ public class PutCardHandler :
 #endregion
 
 #region Delete Card Handler
-public class DeleteCardByIdHandler :
+public sealed class DeleteCardByIdHandler :
     ResponseHandler,
     IRequestHandler<DeleteCardByIdCommand, Response<GetCardViewModel>>
 {
@@ -126,7 +126,7 @@ public class DeleteCardByIdHandler :
     }
 }
 
-public class DeleteCardBySSNHandler :
+public sealed class DeleteCardBySSNHandler :
     ResponseHandler,
     IRequestHandler<DeleteCardBySSNCommand, Response<GetCardViewModel>>
 {
@@ -157,7 +157,7 @@ public class DeleteCardBySSNHandler :
     }
 }
 
-public class DeleteAllCardsHandler :
+public sealed class DeleteAllCardsHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllCardsCommand, Response<GetCardViewModel>>
 {

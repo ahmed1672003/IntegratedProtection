@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.Cars.Queries;
 
-public class GetCarByIdHandler :
+public sealed class GetCarByIdHandler :
     ResponseHandler,
     IRequestHandler<GetCarByIdQuery, Response<GetCarViewModel>>
 {
@@ -25,7 +25,7 @@ public class GetCarByIdHandler :
     }
 }
 
-public class GetCarByPlateHandler :
+public sealed class GetCarByPlateHandler :
     ResponseHandler,
     IRequestHandler<GetCarByPlateQuery, Response<GetCarViewModel>>
 {
@@ -51,7 +51,7 @@ public class GetCarByPlateHandler :
     }
 }
 
-public class GetAllCarsHandler :
+public sealed class GetAllCarsHandler :
     ResponseHandler,
     IRequestHandler<GetAllCarsQuery, Response<IEnumerable<GetCarViewModel>>>
 {

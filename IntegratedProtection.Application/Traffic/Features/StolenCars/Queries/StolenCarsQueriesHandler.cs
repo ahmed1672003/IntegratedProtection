@@ -1,7 +1,7 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Queries;
 
 
-public class GetStolenCarHandler :
+public sealed class GetStolenCarHandler :
     ResponseHandler,
     IRequestHandler<GetAllStolenCarsQuery, Response<IEnumerable<GetStolenCarViewModel>>>
 {

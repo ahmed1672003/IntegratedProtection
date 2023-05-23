@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.TrafficOfficers.Queries;
 
-public class GetAllTrafficOfficersHandler :
+public sealed class GetAllTrafficOfficersHandler :
     ResponseHandler,
     IRequestHandler<GetAllTrafficOfficersQuery, Response<IEnumerable<GetTrafficOfficerViewModel>>>
 {
@@ -20,7 +20,7 @@ public class GetAllTrafficOfficersHandler :
     }
 }
 
-public class GetTrafficOfficerByIdHandler :
+public sealed class GetTrafficOfficerByIdHandler :
     ResponseHandler,
     IRequestHandler<GetTrafficOfficerByIdQuery, Response<GetTrafficOfficerViewModel>>
 {

@@ -1,8 +1,6 @@
-﻿using IntegratedProtection.Infrastructure.Helpers;
-
-namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Queries;
+﻿namespace IntegratedProtection.Application.CivilRegistry.Features.Cards.Queries;
 #region Get Person Handler
-public class GetPersonByIdHandler :
+public sealed class GetPersonByIdHandler :
     ResponseHandler,
     IRequestHandler<GetPersonByIdQuery, Response<GetPersonViewModel>>
 {
@@ -24,7 +22,7 @@ public class GetPersonByIdHandler :
     }
 }
 
-public class GetPersonBySSNHandler :
+public sealed class GetPersonBySSNHandler :
     ResponseHandler,
     IRequestHandler<GetPersonBySSNQuery, Response<GetPersonViewModel>>
 {
@@ -48,7 +46,7 @@ public class GetPersonBySSNHandler :
     }
 }
 
-public class GetAllPersonsHandler :
+public sealed class GetAllPersonsHandler :
     ResponseHandler,
     IRequestHandler<GetAllPersonsQuery, Response<IEnumerable<GetPersonViewModel>>>
 {
@@ -74,7 +72,7 @@ public class GetAllPersonsHandler :
 #endregion
 
 #region Get Person With Card Handler
-public class GetPersonsWithCardHandler :
+public sealed class GetPersonsWithCardHandler :
     ResponseHandler,
     IRequestHandler<GetPersonByIdWithCardQuery, Response<GetPersonWithCardViewModel>>
 {
@@ -117,7 +115,7 @@ public class GetPersonsWithCardHandler :
     }
 }
 
-public class GetPersonBySSNWithCardHandler :
+public sealed class GetPersonBySSNWithCardHandler :
     ResponseHandler,
     IRequestHandler<GetPersonBySSNWithCardQuery, Response<GetPersonWithCardViewModel>>
 {

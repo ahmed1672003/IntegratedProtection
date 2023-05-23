@@ -1,7 +1,7 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.Cars.Commands;
 
 #region Post Car Handlers
-public class PostCarHandler :
+public sealed class PostCarHandler :
     ResponseHandler,
     IRequestHandler<PostCarCommand, Response<GetCarViewModel>>
 {
@@ -33,7 +33,7 @@ public class PostCarHandler :
 #endregion
 
 #region Put Car Handlers
-public class PutCarHandler :
+public sealed class PutCarHandler :
     ResponseHandler,
     IRequestHandler<PutCarCommand, Response<GetCarViewModel>>
 {
@@ -68,7 +68,7 @@ public class PutCarHandler :
 
 
 #region Delete Car Handlers
-public class DeleteCarByIdHandler :
+public sealed class DeleteCarByIdHandler :
     ResponseHandler,
     IRequestHandler<DeleteCarByIdCommand, Response<GetCarViewModel>>
 {
@@ -99,7 +99,7 @@ public class DeleteCarByIdHandler :
     }
 }
 
-public class DeleteCarByPlateHandler :
+public sealed class DeleteCarByPlateHandler :
     ResponseHandler,
     IRequestHandler<DeleteCarByPlateCommand, Response<GetCarViewModel>>
 {
@@ -118,7 +118,7 @@ public class DeleteCarByPlateHandler :
     }
 }
 
-public class DeleteAllCarsHandler :
+public sealed class DeleteAllCarsHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllCarsCommand, Response<GetCarViewModel>>
 {

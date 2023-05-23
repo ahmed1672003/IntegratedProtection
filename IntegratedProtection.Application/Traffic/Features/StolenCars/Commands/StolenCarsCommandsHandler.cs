@@ -1,7 +1,7 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Commands;
 
 #region Post
-public class PostStolenCarHandler :
+public sealed class PostStolenCarHandler :
     ResponseHandler,
     IRequestHandler<PostStolenCarCommand, Response<GetStolenCarViewModel>>
 {
@@ -34,11 +34,8 @@ public class PostStolenCarHandler :
 }
 #endregion
 
-
 #region Delete
-
-
-public class DeleteStolenCarHandler :
+public sealed class DeleteStolenCarHandler :
     ResponseHandler,
     IRequestHandler<DeleteStolenCarCommand, Response<GetStolenCarViewModel>>
 {
@@ -75,7 +72,7 @@ public class DeleteStolenCarHandler :
     }
 }
 
-public class DeleteAllStolenCarsHandler :
+public sealed class DeleteAllStolenCarsHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllStolenCarsCommand, Response<GetStolenCarViewModel>>
 {

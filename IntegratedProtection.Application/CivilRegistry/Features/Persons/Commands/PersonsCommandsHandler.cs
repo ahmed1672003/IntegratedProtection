@@ -3,7 +3,7 @@
 #region Persons Handler
 
 #region => Post Person Handler
-public class PostPersonHandler :
+public sealed class PostPersonHandler :
     ResponseHandler,
     IRequestHandler<PostPersonCommand, Response<GetPersonViewModel>>
 {
@@ -44,7 +44,7 @@ public class PostPersonHandler :
 #endregion
 
 #region => Put Person Handler
-public class PutPersonHandler :
+public sealed class PutPersonHandler :
     ResponseHandler,
     IRequestHandler<PutPersonCommand, Response<GetPersonViewModel>>
 {
@@ -91,7 +91,7 @@ public class PutPersonHandler :
 #endregion
 
 #region => Delete Person Handler
-public class DeletePersonByIdHandler :
+public sealed class DeletePersonByIdHandler :
     ResponseHandler,
     IRequestHandler<DeletePersonByIdCommand, Response<GetPersonViewModel>>
 {
@@ -111,7 +111,7 @@ public class DeletePersonByIdHandler :
     }
 }
 
-public class DeletePersonBySSNHandler :
+public sealed class DeletePersonBySSNHandler :
     ResponseHandler,
     IRequestHandler<DeletePersonBySSNCommand, Response<GetPersonViewModel>>
 {
@@ -132,7 +132,7 @@ public class DeletePersonBySSNHandler :
     }
 }
 
-public class DeleteAllPersonsHandler :
+public sealed class DeleteAllPersonsHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllPersonsCommand, Response<GetPersonViewModel>>
 {

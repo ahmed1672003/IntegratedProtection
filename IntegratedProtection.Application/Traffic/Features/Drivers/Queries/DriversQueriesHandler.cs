@@ -1,6 +1,6 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.Drivers.Queries;
 
-public class GetDriverByIdHandler :
+public sealed class GetDriverByIdHandler :
     ResponseHandler,
     IRequestHandler<GetDriverByIdQuery, Response<GetDriverViewModel>>
 {
@@ -23,7 +23,7 @@ public class GetDriverByIdHandler :
     }
 }
 
-public class GetDriverBySSNHandler :
+public sealed class GetDriverBySSNHandler :
     ResponseHandler,
     IRequestHandler<GetDriverBySSNQuery, Response<GetDriverViewModel>>
 {
@@ -47,7 +47,7 @@ public class GetDriverBySSNHandler :
     }
 }
 
-public class GetAllDriversHandler :
+public sealed class GetAllDriversHandler :
     ResponseHandler,
     IRequestHandler<GetAllDriversQuery, Response<IEnumerable<GetDriverViewModel>>>
 {

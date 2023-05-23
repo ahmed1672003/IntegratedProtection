@@ -3,7 +3,7 @@
 namespace IntegratedProtection.Application.CentralSecurity.Features.Criminals.Commands;
 
 #region Post
-public class PostCriminalHandler :
+public sealed class PostCriminalHandler :
     ResponseHandler,
     IRequestHandler<PostCriminalCommand, Response<GetCriminalViewModel>>
 {
@@ -34,7 +34,7 @@ public class PostCriminalHandler :
 #endregion
 
 #region Put 
-public class PutCriminalHandler :
+public sealed class PutCriminalHandler :
     ResponseHandler,
     IRequestHandler<PutCriminalCommand, Response<GetCriminalViewModel>>
 {
@@ -68,7 +68,7 @@ public class PutCriminalHandler :
 #endregion
 
 #region Delete 
-public class DeleteCriminalByIdHandler :
+public sealed class DeleteCriminalByIdHandler :
     ResponseHandler,
     IRequestHandler<DeleteCriminalByIdCommand, Response<GetCriminalViewModel>>
 {
@@ -99,7 +99,7 @@ public class DeleteCriminalByIdHandler :
     }
 }
 
-public class DeleteCriminalBySSNHandler :
+public sealed class DeleteCriminalBySSNHandler :
     ResponseHandler,
     IRequestHandler<DeleteCriminalBySSNCommand, Response<GetCriminalViewModel>>
 {
@@ -132,7 +132,7 @@ public class DeleteCriminalBySSNHandler :
     }
 }
 
-public class DeleteAllCriminalsHandler :
+public sealed class DeleteAllCriminalsHandler :
     ResponseHandler,
     IRequestHandler<DeleteAllCriminalsCommand, Response<GetCriminalViewModel>>
 {
