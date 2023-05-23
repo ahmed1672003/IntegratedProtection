@@ -68,5 +68,4 @@ public class Car : Base<int>
         CarDriver = new HashSet<CarDriver>();
         StolenCars = new HashSet<StolenCar>();
     }
-
 }
