@@ -12,3 +12,9 @@ public class GetCarDataViewModel
     public IEnumerable<GetTrafficOfficerViewModel> TrafficOfficerData { get; set; }
     public IEnumerable<GetStolenCarViewModel> StolenData { get; set; }
 }
+
+public class GetDriverDataViewModel
+{
+    public GetDriverViewModel DriverData { get; set; }
+    public IEnumerable<GetCarViewModel> CarsData { get; set; }
+}

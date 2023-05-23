@@ -1,4 +1,4 @@
-﻿public class GetPersonDataHandler :
+﻿public sealed class GetPersonDataHandler :
     ResponseHandler,
     IRequestHandler<GetPersonDataQuery, Response<GetPersonDataViewModel>>
 {
@@ -34,7 +34,7 @@
     }
 }
 
-public class GetCarDataHandler
+public sealed class GetCarDataHandler
     : ResponseHandler,
     IRequestHandler<GetCarDataQuery, Response<GetCarDataViewModel>>
 {
@@ -88,6 +88,62 @@ public class GetCarDataHandler
             DriverData = null,
             StolenData = null,
             TrafficOfficerData = null,
+        });
+    }
+}
+
+public sealed class GetCriminalHandler
+    : ResponseHandler,
+    IRequestHandler<GetCriminalDataQuery, Response<GetCriminalViewModel>>
+{
+    public GetCriminalHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper) { }
+
+    public async Task<Response<GetCriminalViewModel>>
+        Handle(GetCriminalDataQuery request, CancellationToken cancellationToken)
+    {
+        if (request.SSN.Equals(null))
+            return BadRequest<GetCriminalViewModel>("SSN is required !");
+
+        if (!await _context.Criminals.IsExist(e => e.SSN.Equals(request.SSN)))
+            return NotFound<GetCriminalViewModel>("person with this SSN not found in Criminals !");
+
+        var criminal = await _context.Criminals.GetAsync(e => e.SSN.Equals(request.SSN));
+
+        var criminalViewModel = _mapper.Map<GetCriminalViewModel>(criminal);
+
+        return Success(criminalViewModel, message: "criminal person founded");
+    }
+}
+
+public sealed class GetDriverDataHandler
+    : ResponseHandler,
+    IRequestHandler<GetDriverDataQuery, Response<GetDriverDataViewModel>>
+{
+    public GetDriverDataHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper) { }
+
+    public async Task<Response<GetDriverDataViewModel>>
+        Handle(GetDriverDataQuery request, CancellationToken cancellationToken)
+    {
+        if (request.SSN.Equals(null))
+            return BadRequest<GetDriverDataViewModel>("SSN is required !");
+
+        if (!await _context.Drivers.IsExist(e => e.SSN.Equals(request.SSN)))
+            return NotFound<GetDriverDataViewModel>($"no driver founded with this SSN: {request.SSN}");
+
+        var driver = await _context.Drivers.GetAsync(e => e.SSN.Equals(request.SSN));
+
+        var result = await _context.Drivers.GetRelatedDataAsync(driver.Id);
+
+        if (result.CarsDrivers.Any())
+            return Success<GetDriverDataViewModel>(data: new()
+            {
+                DriverData = _mapper.Map<GetDriverViewModel>(result),
+                CarsData = _mapper.Map<IEnumerable<GetCarViewModel>>(result.CarsDrivers.Select(e => e.Car)),
+            });
+        return Success<GetDriverDataViewModel>(data: new()
+        {
+            DriverData = _mapper.Map<GetDriverViewModel>(result),
+            CarsData = null
         });
     }
 }
