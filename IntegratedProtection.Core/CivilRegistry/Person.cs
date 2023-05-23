@@ -42,8 +42,8 @@ public class Person : Base<int>
     [MaxLength(100)]
     public string Status { get; set; }
 
-    [MaxLength(1024 * 1025 * 4)]
-    public byte[]? PersonalPhoto { get; set; }
+    //[MaxLength(1024 * 1025 * 4)]
+    //public byte[]? PersonalPhoto { get; set; }
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]

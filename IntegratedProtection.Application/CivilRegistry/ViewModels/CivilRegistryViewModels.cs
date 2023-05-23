@@ -37,8 +37,8 @@ public class PostPersonViewModel
     [MaxLength(100)]
     public string Status { get; set; }
 
-    [FromForm]
-    public IFormFile PersonPhotoFile { get; set; }
+    //[FromForm]
+    //public IFormFile PersonPhotoFile { get; set; }
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
@@ -86,8 +86,8 @@ public class PutPersonViewModel
     [MaxLength(100)]
     public string Status { get; set; }
 
-    [FromForm]
-    public IFormFile PersonPhotoFile { get; set; }
+    //[FromForm]
+    //public IFormFile PersonPhotoFile { get; set; }
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -119,7 +119,7 @@ public class GetPersonViewModel
 
     public int Age { get; set; }
 
-    public string? PersonPhotoBase64 { get; set; }
+    //public string? PersonPhotoBase64 { get; set; }
 }
 #endregion
 
@@ -138,8 +138,8 @@ public class PostCardViewModel
 
     public int PersonId { get; set; }
 
-    [FromForm]
-    public IFormFile CardPhotoFile { get; set; }
+    //[FromForm]
+    //public IFormFile CardPhotoFile { get; set; }
 
 }
 public class PutCardViewModel
@@ -158,8 +158,8 @@ public class PutCardViewModel
 
     public int PersonId { get; set; }
 
-    [FromForm]
-    public IFormFile CardPhotoFile { get; set; }
+    //[FromForm]
+    //public IFormFile CardPhotoFile { get; set; }
 
 }
 public class GetCardViewModel
@@ -180,7 +180,7 @@ public class GetCardViewModel
 
     public bool IsValid { get; set; }
 
-    public string? CardPhotoBase64 { get; set; }
+    //public string? CardPhotoBase64 { get; set; }
 }
 #endregion
 

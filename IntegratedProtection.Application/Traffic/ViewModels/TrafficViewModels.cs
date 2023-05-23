@@ -92,6 +92,8 @@ public class PostDriverViewModel
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
+    public bool IsLicenseFounded { get; set; }
+
 }
 public class PutDriverViewModel
 {
@@ -103,6 +105,8 @@ public class PutDriverViewModel
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
+    public bool IsLicenseFounded { get; set; }
+
 }
 
 public class GetDriverViewModel
@@ -117,6 +121,8 @@ public class GetDriverViewModel
     public string EndDate { get; set; }
 
     public bool IsLicenseValid { get; set; }
+
+    public bool IsLicenseFounded { get; set; }
 }
 #endregion
 

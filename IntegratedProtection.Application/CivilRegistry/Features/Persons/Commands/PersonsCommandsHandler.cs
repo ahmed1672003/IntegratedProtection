@@ -16,15 +16,15 @@ public sealed class PostPersonHandler :
     public async Task<Response<GetPersonViewModel>>
         Handle(PostPersonCommand request, CancellationToken cancellationToken)
     {
-        var personalPhoto = await _fileHelper.ToByteArray(request.ViewModel.PersonPhotoFile);
+        //var personalPhoto = await _fileHelper.ToByteArray(request.ViewModel.PersonPhotoFile);
 
-        if (!_fileHelper.IsValidFile(personalPhoto, request.ViewModel.PersonPhotoFile))
-            return BadRequest<GetPersonViewModel>
-                ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
+        //if (!_fileHelper.IsValidFile(personalPhoto, request.ViewModel.PersonPhotoFile))
+        //    return BadRequest<GetPersonViewModel>
+        //        ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
 
 
         var model = _mapper.Map<Person>(request.ViewModel);
-        model.PersonalPhoto = personalPhoto;
+        //model.PersonalPhoto = personalPhoto;
 
         await _context.Persons.AddAsync(model);
         try
@@ -58,11 +58,11 @@ public sealed class PutPersonHandler :
     public async Task<Response<GetPersonViewModel>>
         Handle(PutPersonCommand request, CancellationToken cancellationToken)
     {
-        var personalPhoto = await _fileHelper.ToByteArray(request.ViewModel.PersonPhotoFile);
+        //var personalPhoto = await _fileHelper.ToByteArray(request.ViewModel.PersonPhotoFile);
 
-        if (!_fileHelper.IsValidFile(personalPhoto, request.ViewModel.PersonPhotoFile))
-            return BadRequest<GetPersonViewModel>
-                ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
+        //if (!_fileHelper.IsValidFile(personalPhoto, request.ViewModel.PersonPhotoFile))
+        //    return BadRequest<GetPersonViewModel>
+        //        ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
 
         if (!await _context.Persons.IsExist(e => e.Id.Equals(request.ViewModel.Id)))
             return NotFound<GetPersonViewModel>("person not found !");
@@ -70,7 +70,7 @@ public sealed class PutPersonHandler :
         var model = await _context.Persons.GetAsync(e => e.Id.Equals(request.ViewModel.Id));
 
         model = _mapper.Map<Person>(request.ViewModel);
-        model.PersonalPhoto = personalPhoto;
+        //model.PersonalPhoto = personalPhoto;
         var resultModel = await _context.Persons.UpdateAsync(model);
 
         try

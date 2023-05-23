@@ -64,7 +64,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsLicenseFounded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +91,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Governorate = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Religion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PersonalPhoto = table.Column<byte[]>(type: "varbinary(max)", maxLength: 4198400, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -152,7 +152,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    CardPhoto = table.Column<byte[]>(type: "varbinary(max)", maxLength: 5242880, nullable: true),
                     Job = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PersonId = table.Column<int>(type: "int", nullable: false)

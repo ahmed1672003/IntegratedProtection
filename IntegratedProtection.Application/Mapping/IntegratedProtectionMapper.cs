@@ -84,9 +84,9 @@ public class IntegratedProtectionMapper : Profile
           cfg =>
         cfg.MapFrom(src => src.DateOfBirth.ToShortDateString()))
 
-        .ForMember(dist => dist.PersonPhotoBase64,
-        cfg =>
-        cfg.MapFrom(src => Convert.ToBase64String(src.PersonalPhoto)))
+        //.ForMember(dist => dist.PersonPhotoBase64,
+        //cfg =>
+        //cfg.MapFrom(src => Convert.ToBase64String(src.PersonalPhoto)))
         .ReverseMap();
     }
     #endregion
@@ -111,9 +111,9 @@ public class IntegratedProtectionMapper : Profile
             cfg =>
             cfg.MapFrom(src => src.EndDate.ToShortDateString()))
 
-            .ForMember(dist => dist.CardPhotoBase64,
-            cfg =>
-            cfg.MapFrom(src => Convert.ToBase64String(src.CardPhoto)))
+            //.ForMember(dist => dist.CardPhotoBase64,
+            //cfg =>
+            //cfg.MapFrom(src => Convert.ToBase64String(src.CardPhoto)))
             .ReverseMap();
     }
     #endregion

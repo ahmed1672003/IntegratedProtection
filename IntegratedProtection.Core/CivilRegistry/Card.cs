@@ -9,8 +9,8 @@ public class Card : Base<int>
     [MaxLength(14)]
     public string SSN { get; set; }
 
-    [MaxLength(1024 * 1024 * 5)]
-    public byte[]? CardPhoto { get; set; }
+    //[MaxLength(1024 * 1024 * 5)]
+    //public byte[]? CardPhoto { get; set; }
 
 
     [MaxLength(100)]
