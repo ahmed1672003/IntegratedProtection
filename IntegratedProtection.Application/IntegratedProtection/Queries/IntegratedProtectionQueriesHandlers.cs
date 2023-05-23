@@ -140,10 +140,11 @@ public sealed class GetDriverDataHandler
                 DriverData = _mapper.Map<GetDriverViewModel>(result),
                 CarsData = _mapper.Map<IEnumerable<GetCarViewModel>>(result.CarsDrivers.Select(e => e.Car)),
             });
+
         return Success<GetDriverDataViewModel>(data: new()
         {
             DriverData = _mapper.Map<GetDriverViewModel>(result),
             CarsData = null
-        });
+        }, message: "No Cars founded for this driver !");
     }
 }
