@@ -9,6 +9,7 @@ global using IntegratedProtection.Application.CivilRegistry.Features.Cards.Queri
 global using IntegratedProtection.Application.CivilRegistry.Features.Persons.Commands.PersonsCommands;
 global using IntegratedProtection.Application.CivilRegistry.Features.Persons.Queries.PersonsQueries;
 global using IntegratedProtection.Application.CivilRegistry.ViewModels;
+global using IntegratedProtection.Application.IHelpers;
 global using IntegratedProtection.Application.Traffic.Features.Cars.Queries.CarsQueries;
 global using IntegratedProtection.Application.Traffic.Features.CarsDrivers.Commands.CarsDriversCommands;
 global using IntegratedProtection.Application.Traffic.Features.Drivers.Commands.DriversCommands;

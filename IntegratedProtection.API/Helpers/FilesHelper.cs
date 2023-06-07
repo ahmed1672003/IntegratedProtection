@@ -1,7 +1,4 @@
-﻿
-using IntegratedProtection.Application.IHelpers;
-
-namespace IntegratedProtection.API.Helpers;
+﻿namespace IntegratedProtection.API.Helpers;
 
 public class FilesHelper : IFileHelper
 {
