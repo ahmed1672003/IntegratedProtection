@@ -56,12 +56,12 @@ public class PersonController : IntegratedProtectionController
 
     #region Get All Persons With CompileQuery
 
-    [HttpGet, ActionName("GetAllWithCompileQuery")]
-    public async Task<IActionResult> GetAllPersonsWithCompileQuery()
-    {
-        var response = await _mediator.Send(new GetAllPersonsQuery());
-        return NewResult(response);
-    }
+    //[HttpGet, ActionName("GetAllWithCompileQuery")]
+    //public async Task<IActionResult> GetAllPersonsWithCompileQuery()
+    //{
+    //    var response = await _mediator.Send(new GetAllPersonsQuery());
+    //    return NewResult(response);
+    //}
     #endregion
 
     [HttpGet("{id:int}"), ActionName("GetByIdWithCard")]
