@@ -63,7 +63,7 @@ public class Person : Base<int>
     {
         get
         {
-            return $"{StreetName}-{Center}-{Governorate}-{Country}-{StreetNumber}";
+            return $"[{StreetNumber}, {StreetName}]-{Center}-{Governorate}-{Country}";
         }
     }
 
