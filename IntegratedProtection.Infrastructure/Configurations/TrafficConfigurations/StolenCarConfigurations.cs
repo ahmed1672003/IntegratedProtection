@@ -1,5 +1,4 @@
 ﻿namespace IntegratedProtection.Infrastructure.Configurations.TrafficConfigurations;
-#region Traffic Configurations
 
 public class StolenCarConfigurations : IEntityTypeConfiguration<StolenCar>
 {
@@ -7,4 +6,3 @@ public class StolenCarConfigurations : IEntityTypeConfiguration<StolenCar>
     {
     }
 }
-#endregion

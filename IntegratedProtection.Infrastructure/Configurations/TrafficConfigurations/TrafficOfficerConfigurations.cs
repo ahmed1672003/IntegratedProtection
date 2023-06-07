@@ -1,6 +1,5 @@
 ﻿namespace IntegratedProtection.Infrastructure.Configurations.TrafficConfigurations;
 
-#region Traffic Configurations
 
 public class TrafficOfficerConfigurations : IEntityTypeConfiguration<TrafficOfficer>
 {
@@ -9,4 +8,3 @@ public class TrafficOfficerConfigurations : IEntityTypeConfiguration<TrafficOffi
 
     }
 }
-#endregion
