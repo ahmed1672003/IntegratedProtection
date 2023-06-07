@@ -16,7 +16,7 @@
            $("#get-car-data").on("click", function () {
                $.ajax({
                    method: "GET",
-                   url: "https://localhost:44382/api/IntegratedProtectionServices/CarData?numbers=11&letters=11",
+                   url: "https://localhost:7085/api/IntegratedProtectionServices/PersonData?SSN=1234567891011",
                    contentType: 'application/json; charset=UTF-8',
                    success: function (response) {
                        console.log(response)
@@ -28,7 +28,7 @@
                });
                $.ajax({
                    method: "GET",
-                   url: 'https://localhost:44382/api/IntegratedProtectionServices/PersonData?SSN=11',
+                   url: 'https://localhost:7085/api/IntegratedProtectionServices/PersonData?SSN=1234567891011',
                    contentType: 'application/json; charset=UTF-8',
                    success: function (response) {
                        console.log(response)
@@ -40,7 +40,7 @@
                });
                $.ajax({
                    method: "GET",
-                   url: 'https://localhost:44382/api/IntegratedProtectionServices/DriverData?SSN=11',
+                   url: 'https://localhost:7085/api/IntegratedProtectionServices/PersonData?SSN=1234567891011',
                    contentType: 'application/json; charset=UTF-8',
                    success: function (response) {
                        console.log(response);
