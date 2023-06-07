@@ -51,9 +51,18 @@ public class PersonController : IntegratedProtectionController
     public async Task<IActionResult> GetAllPersons()
     {
         var response = await _mediator.Send(new GetAllPersonsQuery());
-
         return NewResult(response);
     }
+
+    #region Get All Persons With CompileQuery
+
+    [HttpGet, ActionName("GetAllWithCompileQuery")]
+    public async Task<IActionResult> GetAllPersonsWithCompileQuery()
+    {
+        var response = await _mediator.Send(new GetAllPersonsQuery());
+        return NewResult(response);
+    }
+    #endregion
 
     [HttpGet("{id:int}"), ActionName("GetByIdWithCard")]
     public async Task<IActionResult> GetPersonByIdWithCard(int? id)

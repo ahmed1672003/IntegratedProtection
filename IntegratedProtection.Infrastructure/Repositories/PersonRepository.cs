@@ -6,6 +6,12 @@ public class PersonRepository : Repository<Person>, IPersonRepository
     {
     }
 
+    public async Task<IEnumerable<Person>> GetAllAsyncOptimizedQuery()
+    {
+        var result = CompileQuery(_context);
+        return await Task.FromResult(result);
+    }
+
     public async Task<Person> GetRelatedDataAsync(int id)
     {
         var person = await _entities
@@ -21,4 +27,12 @@ public class PersonRepository : Repository<Person>, IPersonRepository
 
         return personCard;
     }
+
+    private static readonly Func<IntegratedProtectionDbContext, IEnumerable<Person>> CompileQuery =
+         EF.CompileQuery((IntegratedProtectionDbContext context) =>
+                context.Persons.AsNoTracking()
+                    .OrderByDescending(e => e.Age)
+                        .AsQueryable()
+                            .ToList()
+                            );
 }
