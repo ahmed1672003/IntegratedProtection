@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IntegratedProtection.API\IntegratedProtection.API.csproj" />
+  </ItemGroup>
+
 </Project>

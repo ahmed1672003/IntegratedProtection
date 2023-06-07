@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IntegratedProtection.Core\IntegratedProtection.Core.csproj" />
+  </ItemGroup>
+
 </Project>
