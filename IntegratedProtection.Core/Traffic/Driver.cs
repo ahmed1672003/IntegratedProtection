@@ -13,7 +13,7 @@ public class Driver : Base<int>
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
 
-    public bool IsLicenseFounded { get; set; }
+    // public bool IsLicenseFounded { get; set; }
 
     [NotMapped]
     [DataType(DataType.Date)]
