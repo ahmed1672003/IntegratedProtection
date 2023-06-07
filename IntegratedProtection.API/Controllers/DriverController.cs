@@ -1,5 +1,4 @@
-﻿using IntegratedProtection.Application.Traffic.Features.Drivers.Commands;
-using IntegratedProtection.Application.Traffic.Features.Drivers.Queries;
+﻿
 
 namespace IntegratedProtection.API.Controllers;
 

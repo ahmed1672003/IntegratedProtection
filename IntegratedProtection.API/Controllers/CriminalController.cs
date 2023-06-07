@@ -1,4 +1,6 @@
-﻿namespace IntegratedProtection.API.Controllers;
+﻿
+
+namespace IntegratedProtection.API.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
