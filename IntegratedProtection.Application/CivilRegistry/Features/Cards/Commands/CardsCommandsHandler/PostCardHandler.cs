@@ -16,15 +16,8 @@ public sealed class PostCardHandler :
     public async Task<Response<GetCardViewModel>>
         Handle(PostCardCommand request, CancellationToken cancellationToken)
     {
-        //var cardPhoto = await _filesHelper.ToByteArray(request.ViewModel.CardPhotoFile);
-
-        //if (!_filesHelper.IsValidFile(cardPhoto, request.ViewModel.CardPhotoFile))
-        //    return BadRequest<GetCardViewModel>
-        //        ("allowed extension [ .jpg, .png, .jpeg ] and allowed max size is 5 MB !");
 
         var model = _mapper.Map<Card>(request.ViewModel);
-        //model.CardPhoto = cardPhoto;
-
 
         var resultModel = await _context.Cards.AddAsync(model);
 
