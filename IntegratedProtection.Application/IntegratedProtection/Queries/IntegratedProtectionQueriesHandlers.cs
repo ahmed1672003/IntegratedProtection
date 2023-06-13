@@ -5,7 +5,6 @@
     public GetPersonDataHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper)
     {
     }
-
     public async Task<Response<GetPersonDataViewModel>>
         Handle(GetPersonDataQuery request, CancellationToken cancellationToken)
     {

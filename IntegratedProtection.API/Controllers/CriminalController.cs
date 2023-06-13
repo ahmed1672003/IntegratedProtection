@@ -38,7 +38,7 @@ public class CriminalController : IntegratedProtectionController
     }
 
     [HttpGet, ActionName("GetBySSN")]
-    public async Task<IActionResult> GetById([FromQuery] string SSN)
+    public async Task<IActionResult> GetBySSN([FromQuery] string SSN)
     {
         var response = await _mediator.Send(new GetCriminalBySSNQuery(SSN));
         return NewResult(response);

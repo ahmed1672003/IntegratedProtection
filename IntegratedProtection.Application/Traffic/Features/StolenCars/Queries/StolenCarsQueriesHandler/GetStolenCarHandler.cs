@@ -26,4 +26,31 @@ public sealed class GetStolenCarHandler :
     }
 }
 
+public sealed class GetStolenCarWithTrafficOfficerHandler :
+    ResponseHandler,
+    IRequestHandler<GetStolenCarWithTrafficOfficerQuery, Response<GetStolenCarWithTrafficOfficerViewModel>>
+{
+    public GetStolenCarWithTrafficOfficerHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper) { }
+
+    public async Task<Response<GetStolenCarWithTrafficOfficerViewModel>>
+        Handle(GetStolenCarWithTrafficOfficerQuery request, CancellationToken cancellationToken)
+    {
+        if (request.Number.Equals(null) && request.Letters.Equals(null))
+            return BadRequest<GetStolenCarWithTrafficOfficerViewModel>(message: "Number & Letters are required !");
+
+        if (!await _context.Cars.IsExist(c => c.Letters.Equals(request.Letters) && c.Number.Equals(request.Number)))
+            return NotFound<GetStolenCarWithTrafficOfficerViewModel>(message: "car not found !");
+        var model = await _context.StolenCars.GetStolenCarWithTrafficOfficerAsync(request.Number, request.Letters);
+
+        if (model.Equals(null))
+            return NotFound<GetStolenCarWithTrafficOfficerViewModel>(message: "car is not stolen !");
+
+        return Success(new GetStolenCarWithTrafficOfficerViewModel()
+        {
+            GetStolenCarViewModel = _mapper.Map<GetStolenCarViewModel>(model),
+            GetTrafficOfficerViewModel = _mapper.Map<GetTrafficOfficerViewModel>(model.TrafficOfficer)
+        });
+    }
+}
+
 

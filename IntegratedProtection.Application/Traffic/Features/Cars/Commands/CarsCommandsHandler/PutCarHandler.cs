@@ -1,8 +1,8 @@
 ﻿using IntegratedProtection.Application.Traffic.Features.Cars.Commands.CarsCommands;
 
 namespace IntegratedProtection.Application.Traffic.Features.Cars.Commands.CarsCommandsHandler;
-#region Post Car Handlers
-#endregion
+
+
 
 #region Put Car Handlers
 public sealed class PutCarHandler :

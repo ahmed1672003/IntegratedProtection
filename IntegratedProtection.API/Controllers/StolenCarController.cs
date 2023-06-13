@@ -28,6 +28,13 @@ public class StolenCarController : IntegratedProtectionController
 
         return NewResult(response);
     }
+
+    [HttpGet, ActionName("GetByPlate")]
+    public async Task<IActionResult> GetByPlate(string number, string letters)
+    {
+        var response = await _mediator.Send(new GetStolenCarWithTrafficOfficerQuery(number, letters));
+        return NewResult(response);
+    }
     #endregion
 
     #region DELETE

@@ -175,7 +175,6 @@ public class GetTrafficOfficerViewModel
 }
 #endregion
 
-
 #region Stolen Cars View Models
 public class PostStolenCarViewModel
 {
@@ -190,6 +189,13 @@ public class GetStolenCarViewModel
     public int? CarId { get; set; }
     public int? TrafficOfficerId { get; set; }
     public string CreatedDate { get; set; }
+}
+
+public class GetStolenCarWithTrafficOfficerViewModel
+{
+    public GetStolenCarViewModel GetStolenCarViewModel { get; set; }
+
+    public GetTrafficOfficerViewModel GetTrafficOfficerViewModel { get; set; }
 }
 #endregion
 
