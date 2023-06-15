@@ -1,4 +1,6 @@
-﻿namespace IntegratedProtection.Application.Mapping;
+﻿using IntegratedProtection.Application.Folders.ViewModels;
+
+namespace IntegratedProtection.Application.Mapping;
 
 public class IntegratedProtectionMapper : Profile
 {
@@ -62,7 +64,10 @@ public class IntegratedProtectionMapper : Profile
 
         #endregion
 
-
+        #region Files Mapper
+        PostFileMapper();
+        GetFileMapper();
+        #endregion
     }
 
     #region CivilRegistry Mapper
@@ -237,5 +242,17 @@ public class IntegratedProtectionMapper : Profile
 
     #endregion
 
+    #endregion
+
+
+    #region Files
+    public void PostFileMapper()
+    {
+        CreateMap<PostFileViewModel, UploadedFile>().ReverseMap();
+    }
+    public void GetFileMapper()
+    {
+        CreateMap<UploadedFile, GetFileViewModel>().ReverseMap();
+    }
     #endregion
 }
