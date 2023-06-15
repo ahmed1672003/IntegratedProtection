@@ -1,4 +1,5 @@
 ﻿using IntegratedProtection.Application.Folders.ViewModels;
+using IntegratedProtection.Core.FilesEntity;
 
 namespace IntegratedProtection.Application.Mapping;
 
