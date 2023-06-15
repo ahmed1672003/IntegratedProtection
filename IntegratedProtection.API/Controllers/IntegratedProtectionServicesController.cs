@@ -6,32 +6,47 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
 {
     public IntegratedProtectionServicesController(IMediator mediator) : base(mediator) { }
 
-    [HttpGet]
-    public async Task<IActionResult> PersonData([FromQuery] string SSN)
+    [HttpGet, ActionName(nameof(CarByPlate))]
+    public async Task<IActionResult> CarByPlate(string letters, string number)
     {
-        var response = await _mediator
-            .Send(new GetPersonDataQuery(SSN));
+        var response = await _mediator.Send(new GetCarByPlateQuery(letters, number));
+
         return NewResult(response);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CarData([FromQuery] string numbers, [FromQuery] string letters)
+    [HttpGet, ActionName(nameof(CardBySSN))]
+    public async Task<IActionResult> CardBySSN([FromQuery] string SSN)
     {
-        var response = await _mediator.Send(new GetCarDataQuery(numbers, letters));
+        var response = await _mediator.Send(new GetCardBySSNQuery(SSN));
         return NewResult(response);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CriminalData([FromQuery] string SSN)
+    [HttpGet, ActionName(nameof(CriminalBySSN))]
+    public async Task<IActionResult> CriminalBySSN([FromQuery] string SSN)
     {
-        var response = await _mediator.Send(new GetCriminalDataQuery(SSN));
+        var response = await _mediator.Send(new GetCriminalBySSNQuery(SSN));
         return NewResult(response);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> DriverData([FromQuery] string SSN)
+    [HttpGet, ActionName(nameof(DriverBySSN))]
+    public async Task<IActionResult> DriverBySSN([FromQuery] string SSN)
     {
-        var response = await _mediator.Send(new GetDriverDataQuery(SSN));
+        var response = await _mediator.Send(new GetDriverBySSNQuery(SSN));
+        return NewResult(response);
+    }
+
+    [HttpGet, ActionName(nameof(PersonBySSN))]
+    public async Task<IActionResult> PersonBySSN([FromQuery] string SSN)
+    {
+        var response =
+            await _mediator.Send(new GetPersonBySSNQuery(SSN));
+        return NewResult(response);
+    }
+
+    [HttpGet, ActionName(nameof(StolenCarByPlate))]
+    public async Task<IActionResult> StolenCarByPlate(string number, string letters)
+    {
+        var response = await _mediator.Send(new GetStolenCarWithTrafficOfficerQuery(number, letters));
         return NewResult(response);
     }
 }
