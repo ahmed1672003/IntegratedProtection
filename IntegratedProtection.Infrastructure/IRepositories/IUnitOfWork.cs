@@ -11,5 +11,7 @@ public interface IUnitOfWork : IAsyncDisposable
     IStolenCarRepository StolenCars { get; }
     ITrafficOfficerRepository TrafficOfficers { get; }
 
+    IUploadedFileRepository UploadedFiles { get; }
+
     Task<int> SaveChangesAsync();
 }
