@@ -36,8 +36,5 @@ public static class FileExtensions
         string path = Path.Combine(webHostEnvironment.WebRootPath, "Files\\", fileName);
 
         var fileStream = File.ReadAllBytes($"");
-
-
-
     }
 }
