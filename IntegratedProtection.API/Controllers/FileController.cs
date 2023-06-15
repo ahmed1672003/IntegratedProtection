@@ -24,7 +24,4 @@ public class FileController : IntegratedProtectionController
         var response = await _mediator.Send(new PostFileCommand(viewModel));
         return NewResult(response);
     }
-
-
-
 }

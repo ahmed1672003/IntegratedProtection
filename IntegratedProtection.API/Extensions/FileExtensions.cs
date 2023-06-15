@@ -31,10 +31,14 @@ public static class FileExtensions
         return base64String;
     }
 
-    public static void GetBase64StringFromPath(IWebHostEnvironment webHostEnvironment, string fileName)
+    public static string GetBase64StringFromPath(IWebHostEnvironment webHostEnvironment, string fileName)
     {
         string path = Path.Combine(webHostEnvironment.WebRootPath, "Files\\", fileName);
+        if (!File.Exists(path))
+            return string.Empty;
 
-        var fileStream = File.ReadAllBytes($"");
+        var byteArray = File.ReadAllBytes(path);
+
+        return Convert.ToBase64String(byteArray.ToArray());
     }
 }
