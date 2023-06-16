@@ -6,24 +6,29 @@ public class FilesHelper : IFileHelper
 
     public FilesHelper(IWebHostEnvironment environment) => _environment = environment;
 
-    public void DeleteFile(string fullPath)
+    public Task DeleteFile(string fullPath)
     {
         if (File.Exists(fullPath))
             File.Delete(fullPath);
+
+        return Task.CompletedTask;
     }
 
-    public string ReadFileAsBase64(string fullPath)
+    public async Task<string> ReadFileAsBase64(string fullPath)
     {
         if (!File.Exists(fullPath))
             return string.Empty;
 
         var fileBytes = File.ReadAllBytes(fullPath);
-        return Convert.ToBase64String(fileBytes);
+
+        var base64 = Convert.ToBase64String(fileBytes);
+
+        return await Task.FromResult(base64);
     }
 
     public async Task ToStorage(IFormFile file, string path)
     {
-        var stream = new FileStream(path, FileMode.Create);
+        using var stream = new FileStream(path, FileMode.Create);
         await file.CopyToAsync(stream);
     }
 }

@@ -1,25 +1,30 @@
-﻿namespace IntegratedProtection.Application.Folders.Queries.FilesQueriesHandlers;
-//public class GetCarFileQueryHandler :
-//    ResponseHandler,
-//    IRequestHandler<GetFileCarQuery, Response<GetFileViewModel>>
-//{
-//    private readonly IFileHelper _fileHelper;
-//    public GetCarFileQueryHandler(IUnitOfWork context, IMapper mapper, IFileHelper fileHelper) : base(context, mapper)
-//    {
-//        _fileHelper = fileHelper;
-//    }
+﻿using IntegratedProtection.Application.Constants;
+using IntegratedProtection.Application.Folders.Queries.FilesQueries;
+using IntegratedProtection.Application.Folders.ViewModels;
 
-//    public async Task<Response<GetFileViewModel>>
-//        Handle(GetFileCarQuery request, CancellationToken cancellationToken)
-//    {
-//        if (!await _context.UploadedFiles.IsExist(f => !f.IsPersonFile))
-//            return NotFound<GetFileViewModel>("no file founded !");
+namespace IntegratedProtection.Application.Folders.Queries.FilesQueriesHandlers;
+public class GetCarFileQueryHandler :
+    ResponseHandler,
+    IRequestHandler<GetFileCarQuery, Response<GetFileViewModel>>
+{
+    private readonly IFileHelper _fileHelper;
+    public GetCarFileQueryHandler(IUnitOfWork context, IMapper mapper, IFileHelper fileHelper) : base(context, mapper)
+    {
+        _fileHelper = fileHelper;
+    }
 
-//        var viewModel =
-//            _mapper.Map<GetFileViewModel>(await _context.UploadedFiles.GetAsync(f => !f.IsPersonFile));
+    public async Task<Response<GetFileViewModel>>
+        Handle(GetFileCarQuery request, CancellationToken cancellationToken)
+    {
+        if (!await _context.UploadedFiles.IsExist(f => !f.IsPersonsFile))
+            return NotFound<GetFileViewModel>("files not founded !");
 
-//        viewModel.Base64String = _fileHelper.ReadFileAsBase64(viewModel.FileFullPath);
+        var viewModel = _mapper.Map<GetFileViewModel>
+            (await _context.UploadedFiles.GetAsync(f => !f.IsPersonsFile));
 
-//        return Success(viewModel);
-//    }
-//}
+        var path = Path.Combine(request.WebRootPath, Stocks.Videos, viewModel.StorageFileName!);
+
+        viewModel.Base64 = await _fileHelper.ReadFileAsBase64(path);
+        return Success(viewModel);
+    }
+}
