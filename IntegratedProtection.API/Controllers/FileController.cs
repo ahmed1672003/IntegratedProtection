@@ -12,8 +12,6 @@ public class FileController : IntegratedProtectionController
     public FileController(IMediator mediator, IWebHostEnvironment environment) : base(mediator) =>
         _webHostEnvironment = environment;
 
-
-
     [HttpPost, ActionName(nameof(Upload))]
     public async Task<IActionResult> Upload([FromForm] PostFileViewModel viewModel)
     {
