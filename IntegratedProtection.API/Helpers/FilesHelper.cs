@@ -26,6 +26,16 @@ public class FilesHelper : IFileHelper
         return await Task.FromResult(base64);
     }
 
+    public async Task<string> ReadFileAsBase64(byte[] target) =>
+        await Task.FromResult(Convert.ToBase64String(target));
+    public async Task<byte[]> ToByteArray(IFormFile file)
+    {
+        using var memoryStream = new MemoryStream();
+        await file.CopyToAsync(memoryStream);
+        var fileBytes = memoryStream.ToArray();
+        return await Task.FromResult(fileBytes);
+    }
+
     public async Task ToStorage(IFormFile file, string path)
     {
         using var stream = new FileStream(path, FileMode.Create);

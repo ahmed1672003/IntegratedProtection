@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialeCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -125,7 +125,7 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StorageFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    File = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPersonsFile = table.Column<bool>(type: "bit", nullable: false)
                 },

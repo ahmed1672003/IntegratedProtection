@@ -1,5 +1,4 @@
-﻿using IntegratedProtection.Application.Constants;
-using IntegratedProtection.Application.Folders.Queries.FilesQueries;
+﻿using IntegratedProtection.Application.Folders.Queries.FilesQueries;
 using IntegratedProtection.Application.Folders.ViewModels;
 
 namespace IntegratedProtection.Application.Folders.Queries.FilesQueriesHandlers;
@@ -22,11 +21,6 @@ public class GetPersonFileQueryHandler :
 
         var viewModel =
             _mapper.Map<GetFileViewModel>(await _context.UploadedFiles.GetAsync(f => f.IsPersonsFile));
-
-        var path = Path.Combine(request.WebRootPath, Stocks.Videos, viewModel.StorageFileName!);
-
-
-        viewModel.Base64 = await _fileHelper.ReadFileAsBase64(path);
 
         return Success(viewModel);
     }

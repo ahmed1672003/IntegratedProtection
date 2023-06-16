@@ -12,24 +12,26 @@ public class FileController : IntegratedProtectionController
     public FileController(IMediator mediator, IWebHostEnvironment environment) : base(mediator) =>
         _webHostEnvironment = environment;
 
+
+
     [HttpPost, ActionName(nameof(Upload))]
     public async Task<IActionResult> Upload([FromForm] PostFileViewModel viewModel)
     {
-        var response = await _mediator.Send(new PostFileCommand(viewModel, _webHostEnvironment.WebRootPath));
+        var response = await _mediator.Send(new PostFileCommand(viewModel));
         return NewResult(response);
     }
 
     [HttpGet, ActionName(nameof(GetCarFile))]
     public async Task<IActionResult> GetCarFile()
     {
-        var response = await _mediator.Send(new GetFileCarQuery(_webHostEnvironment.WebRootPath));
+        var response = await _mediator.Send(new GetFileCarQuery());
         return NewResult(response);
     }
 
     [HttpGet, ActionName(nameof(GetPersonFile))]
     public async Task<IActionResult> GetPersonFile()
     {
-        var response = await _mediator.Send(new GetPersonFileQuery(_webHostEnvironment.WebRootPath));
+        var response = await _mediator.Send(new GetPersonFileQuery());
         return NewResult(response);
     }
 
@@ -38,7 +40,7 @@ public class FileController : IntegratedProtectionController
     {
         var response =
 
-            await _mediator.Send(new DeleteFileByIdCommand(id, _webHostEnvironment.WebRootPath));
+            await _mediator.Send(new DeleteFileByIdCommand(id));
         return NewResult(response);
     }
 

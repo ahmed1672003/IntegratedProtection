@@ -254,13 +254,17 @@ public class IntegratedProtectionMapper : Profile
             cfg.MapFrom(src => src.file.ContentType))
             .ForMember(dist => dist.FileName, cfg =>
             cfg.MapFrom(src => src.file.FileName))
-            .ForMember(dist => dist.StorageFileName, cfg =>
-            cfg.MapFrom(src => Path.GetRandomFileName()))
+            .ForMember(dist => dist.File, cfg =>
+            cfg.Ignore())
+
             .ReverseMap();
     }
     public void GetFileMapper()
     {
-        CreateMap<UploadedFile, GetFileViewModel>().ReverseMap();
+        CreateMap<UploadedFile, GetFileViewModel>()
+            .ForMember(dist => dist.Base64, cfg => cfg.MapFrom(src =>
+            Convert.ToBase64String(src.File)))
+            .ReverseMap();
     }
     #endregion
 }

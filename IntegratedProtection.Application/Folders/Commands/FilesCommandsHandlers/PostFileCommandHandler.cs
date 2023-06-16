@@ -1,5 +1,4 @@
-﻿using IntegratedProtection.Application.Constants;
-using IntegratedProtection.Application.Folders.Commands.FilesCommands;
+﻿using IntegratedProtection.Application.Folders.Commands.FilesCommands;
 using IntegratedProtection.Core.FilesEntity;
 
 namespace IntegratedProtection.Application.Folders.Commands.FilesCommandsHandlers;
@@ -53,11 +52,7 @@ public class PostFileCommandHandler :
             return BadRequest<string>("file field is required !");
 
         var model = _mapper.Map<UploadedFile>(request.FileViewModel);
-
-        var path = Path.Combine(request.WebRootPath, Stocks.Videos, model.StorageFileName!);
-
-        await _fileHelper.ToStorage(request.FileViewModel.file, path);
-
+        model.File = await _fileHelper.ToByteArray(request.FileViewModel.file);
         await _context.UploadedFiles.AddAsync(model);
         try
         {

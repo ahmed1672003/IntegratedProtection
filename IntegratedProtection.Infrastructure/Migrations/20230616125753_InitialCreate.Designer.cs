@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230616095907_InitialeCreate")]
-    partial class InitialeCreate
+    [Migration("20230616125753_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,14 +166,15 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("File")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPersonsFile")
                         .HasColumnType("bit");
-
-                    b.Property<string>("StorageFileName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -1,5 +1,4 @@
-﻿using IntegratedProtection.Application.Constants;
-using IntegratedProtection.Application.Folders.Commands.FilesCommands;
+﻿using IntegratedProtection.Application.Folders.Commands.FilesCommands;
 using IntegratedProtection.Application.Folders.ViewModels;
 
 namespace IntegratedProtection.Application.Folders.Commands.FilesCommandsHandlers;
@@ -23,17 +22,9 @@ public class DeleteFileByIdCommandHandler :
 
         if (!await _context.UploadedFiles.IsExist(f => f.Id.Equals(request.Id)))
             return NotFound<GetFileViewModel>("not found !");
-
-        var model = await _context.UploadedFiles.GetAsync(f => f.Id.Equals(request.Id));
-
-        var path = Path.Combine(request.WebRootPath, Stocks.Videos, model.StorageFileName!);
-
-        await _fileHelper.DeleteFile(path);
-
-        await _context.UploadedFiles.DeleteAsync(model);
-
         try
         {
+            await _context.UploadedFiles.ExecuteDeleteAsync(f => f.Id.Equals(request.Id));
             await _context.SaveChangesAsync();
         }
         catch (Exception)

@@ -1,5 +1,4 @@
-﻿using IntegratedProtection.Application.Constants;
-using IntegratedProtection.Application.Folders.Commands.FilesCommands;
+﻿using IntegratedProtection.Application.Folders.Commands.FilesCommands;
 using IntegratedProtection.Application.Folders.ViewModels;
 
 namespace IntegratedProtection.Application.Folders.Commands.FilesCommandsHandlers;
@@ -19,23 +18,14 @@ public class DeleteAllFilesCommandHandler :
     {
         if (!await _context.UploadedFiles.IsExist())
             return NotFound<GetFileViewModel>("no files founded !");
-
-        var files = await _context.UploadedFiles.GetAllAsync();
-
         try
         {
-            foreach (var file in files)
-            {
-                await _fileHelper.DeleteFile(Path.Combine(request.WebRootPath, Stocks.Videos, file.StorageFileName!));
-            }
-
             await _context.UploadedFiles.ExecuteDeleteAsync();
         }
         catch (Exception)
         {
             return BadRequest<GetFileViewModel>();
         }
-
         return Delete<GetFileViewModel>();
     }
 }
