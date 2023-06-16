@@ -1,4 +1,6 @@
-﻿namespace IntegratedProtection.API.Controllers;
+﻿using IntegratedProtection.Application.Folders.Queries.FilesQueries;
+
+namespace IntegratedProtection.API.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
@@ -47,6 +49,20 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
     public async Task<IActionResult> StolenCarByPlate(string number, string letters)
     {
         var response = await _mediator.Send(new GetStolenCarWithTrafficOfficerQuery(number, letters));
+        return NewResult(response);
+    }
+
+    [HttpGet, ActionName(nameof(GetCarFile))]
+    public async Task<IActionResult> GetCarFile()
+    {
+        var response = await _mediator.Send(new GetFileCarQuery());
+        return NewResult(response);
+    }
+
+    [HttpGet, ActionName(nameof(GetPersonFile))]
+    public async Task<IActionResult> GetPersonFile()
+    {
+        var response = await _mediator.Send(new GetPersonFileQuery());
         return NewResult(response);
     }
 }
