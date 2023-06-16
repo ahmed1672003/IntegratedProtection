@@ -249,7 +249,14 @@ public class IntegratedProtectionMapper : Profile
     #region Files
     public void PostFileMapper()
     {
-        CreateMap<PostFileViewModel, UploadedFile>().ReverseMap();
+        CreateMap<PostFileViewModel, UploadedFile>()
+            .ForMember(dist => dist.ContentType, cfg =>
+            cfg.MapFrom(src => src.file.ContentType))
+            .ForMember(dist => dist.FileName, cfg =>
+            cfg.MapFrom(src => src.file.FileName))
+            .ForMember(dist => dist.StorageFileName, cfg =>
+            cfg.MapFrom(src => Path.GetRandomFileName()))
+            .ReverseMap();
     }
     public void GetFileMapper()
     {

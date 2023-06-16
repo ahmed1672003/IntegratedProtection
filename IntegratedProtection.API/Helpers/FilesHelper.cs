@@ -20,4 +20,10 @@ public class FilesHelper : IFileHelper
         var fileBytes = File.ReadAllBytes(fullPath);
         return Convert.ToBase64String(fileBytes);
     }
+
+    public async Task ToStorage(IFormFile file, string path)
+    {
+        var stream = new FileStream(path, FileMode.Create);
+        await file.CopyToAsync(stream);
+    }
 }

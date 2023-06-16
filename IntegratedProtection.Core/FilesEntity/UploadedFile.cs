@@ -1,11 +1,10 @@
 ﻿namespace IntegratedProtection.Core.FilesEntity;
-[Table("UploadedFiles", Schema = "Files"),
-PrimaryKey(nameof(Id)),
-Index(nameof(FileFullPath), IsUnique = true)]
+[Table("UploadedFiles", Schema = "Files"), PrimaryKey(nameof(Id))]
 public class UploadedFile : Base<string>
 {
     public UploadedFile() => Id = Guid.NewGuid().ToString();
-    public string FileFullPath { get; set; }
-    public bool IsPersonFile { get; set; }
-
+    public string? FileName { get; set; }
+    public string? StorageFileName { get; set; }
+    public string? ContentType { get; set; }
+    public bool IsPersonsFile { get; set; }
 }

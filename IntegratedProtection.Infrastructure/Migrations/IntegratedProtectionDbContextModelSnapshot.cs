@@ -160,17 +160,19 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FileFullPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsPersonFile")
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPersonsFile")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.Property<string>("StorageFileName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("FileFullPath")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("UploadedFiles", "Files");
                 });

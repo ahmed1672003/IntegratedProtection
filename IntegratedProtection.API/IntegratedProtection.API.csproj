@@ -25,8 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\Videos\" />
   </ItemGroup>
 
 </Project>

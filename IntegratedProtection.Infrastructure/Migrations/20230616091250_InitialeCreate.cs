@@ -124,8 +124,10 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FileFullPath = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsPersonFile = table.Column<bool>(type: "bit", nullable: false)
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StorageFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsPersonsFile = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,13 +232,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 schema: "Traffic",
                 table: "StolenCars",
                 column: "TrafficOfficerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UploadedFiles_FileFullPath",
-                schema: "Files",
-                table: "UploadedFiles",
-                column: "FileFullPath",
-                unique: true);
         }
 
         /// <inheritdoc />
