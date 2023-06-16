@@ -2,6 +2,6 @@
 
 public interface IFileHelper
 {
-    bool IsValidFile(byte[] target, IFormFile file);
-    Task<byte[]> ToByteArray(IFormFile file);
+    string ReadFileAsBase64(string fullPath);
+    void DeleteFile(string fullPath);
 }

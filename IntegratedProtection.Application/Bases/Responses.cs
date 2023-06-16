@@ -24,9 +24,10 @@ public class Response<TData>
     public HttpStatusCode StatusCode { get; set; }
     public bool Succeeded { get; set; }
     public string Message { get; set; }
-    public TData? Data { get; set; }
     public List<string> Errors { get; set; }
+    public TData? Data { get; set; }
 }
+
 public class ResponseHandler : Handler
 {
     public ResponseHandler(IUnitOfWork context, IMapper mapper) : base(context, mapper) { }

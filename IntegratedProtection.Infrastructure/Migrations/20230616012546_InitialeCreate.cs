@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialeCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,6 +19,9 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
             migrationBuilder.EnsureSchema(
                 name: "CentralSecurity");
+
+            migrationBuilder.EnsureSchema(
+                name: "Files");
 
             migrationBuilder.CreateTable(
                 name: "Cars",
@@ -113,6 +116,20 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TrafficOfficers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UploadedFiles",
+                schema: "Files",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FileFullPath = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsPersonFile = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UploadedFiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,6 +230,13 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 schema: "Traffic",
                 table: "StolenCars",
                 column: "TrafficOfficerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UploadedFiles_FileFullPath",
+                schema: "Files",
+                table: "UploadedFiles",
+                column: "FileFullPath",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -233,6 +257,10 @@ namespace IntegratedProtection.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "StolenCars",
                 schema: "Traffic");
+
+            migrationBuilder.DropTable(
+                name: "UploadedFiles",
+                schema: "Files");
 
             migrationBuilder.DropTable(
                 name: "Persons",

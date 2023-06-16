@@ -12,7 +12,7 @@ public class PostFileCommandHandler :
     public async Task<Response<PostFileViewModel>>
         Handle(PostFileCommand request, CancellationToken cancellationToken)
     {
-        if (request.FileViewModel.FileName is null)
+        if (string.IsNullOrEmpty(request.FileViewModel.FileFullPath) || string.IsNullOrWhiteSpace(request.FileViewModel.FileFullPath))
             return BadRequest<PostFileViewModel>(message: "File field is required !");
 
         var uploadedFile = _mapper.Map<UploadedFile>(request.FileViewModel);
@@ -27,9 +27,7 @@ public class PostFileCommandHandler :
         }
 
         var result = _mapper.Map<PostFileViewModel>(
-            await _context.UploadedFiles.GetAsync(u => u.FileName.Equals(request.FileViewModel.FileName)));
-
-
+            await _context.UploadedFiles.GetAsync(u => u.FileFullPath.Equals(request.FileViewModel.FileFullPath)));
         return Success(result);
     }
 }

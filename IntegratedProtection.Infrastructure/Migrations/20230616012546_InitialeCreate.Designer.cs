@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230607051928_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230616012546_InitialeCreate")]
+    partial class InitialeCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,6 +156,26 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons", "CivilRegistry");
+                });
+
+            modelBuilder.Entity("IntegratedProtection.Core.FilesEntity.UploadedFile", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FileFullPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsPersonFile")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileFullPath")
+                        .IsUnique();
+
+                    b.ToTable("UploadedFiles", "Files");
                 });
 
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Car", b =>

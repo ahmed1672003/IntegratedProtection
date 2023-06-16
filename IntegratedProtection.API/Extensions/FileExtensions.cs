@@ -2,43 +2,25 @@
 
 public static class FileExtensions
 {
-    // Key => fileName , Value => Base64String
     public static async Task<string> ToStorage(this IFormFile file, IWebHostEnvironment webHostEnvironment)
     {
         //Create the Directory.
-        string path = Path.Combine(webHostEnvironment.WebRootPath, "Files\\");
+        string storagePath = Path.Combine(webHostEnvironment.WebRootPath, @"Files\");
 
         //Fetch the File Name.
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
+        if (!Directory.Exists(storagePath))
+            Directory.CreateDirectory(storagePath);
 
         string fileName = $"{Guid.NewGuid().ToString()}{file.FileName}";
 
+        // create fullPath 
+        string fullPath = Path.Combine(storagePath, fileName);
+
         //Save the File.
-        using FileStream stream = new(Path.Combine(path, fileName), FileMode.Create);
+        using FileStream stream = new(fullPath, FileMode.Create);
+
         await file.CopyToAsync(stream);
 
-        return fileName;
-    }
-    public static async Task<string> GetBase64String(this IFormFile file, IWebHostEnvironment webHostEnvironment)
-    {
-        using var memoryStream = new MemoryStream();
-
-        await file.CopyToAsync(memoryStream);
-
-        var base64String = Convert.ToBase64String(memoryStream.ToArray());
-
-        return base64String;
-    }
-
-    public static string GetBase64StringFromPath(IWebHostEnvironment webHostEnvironment, string fileName)
-    {
-        string path = Path.Combine(webHostEnvironment.WebRootPath, "Files\\", fileName);
-        if (!File.Exists(path))
-            return string.Empty;
-
-        var byteArray = File.ReadAllBytes(path);
-
-        return Convert.ToBase64String(byteArray.ToArray());
+        return fullPath;
     }
 }
