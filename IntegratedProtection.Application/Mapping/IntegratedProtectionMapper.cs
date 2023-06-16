@@ -256,7 +256,6 @@ public class IntegratedProtectionMapper : Profile
             cfg.MapFrom(src => src.file.FileName))
             .ForMember(dist => dist.File, cfg =>
             cfg.Ignore())
-
             .ReverseMap();
     }
     public void GetFileMapper()
