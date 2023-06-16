@@ -1,18 +1,15 @@
 ﻿using IntegratedProtection.Application.Folders.Queries.FilesQueries;
-
 namespace IntegratedProtection.API.Controllers;
-
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class IntegratedProtectionServicesController : IntegratedProtectionController
 {
     public IntegratedProtectionServicesController(IMediator mediator) : base(mediator) { }
-
     [HttpGet, ActionName(nameof(CarByPlate))]
     public async Task<IActionResult> CarByPlate(string letters, string number)
     {
-        var response = await _mediator.Send(new GetCarByPlateQuery(letters, number));
-
+        var response =
+            await _mediator.Send(new GetCarByPlateQuery(letters, number));
         return NewResult(response);
     }
 

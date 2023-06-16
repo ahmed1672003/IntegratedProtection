@@ -7,14 +7,11 @@ namespace IntegratedProtection.API.Controllers;
 public class IntegratedProtectionController : Controller
 {
     protected readonly IMediator _mediator;
-
-
     public IntegratedProtectionController(IMediator mediator)
     {
         _mediator = mediator;
 
     }
-
     #region Actions
     public ObjectResult NewResult<TData>(Response<TData> response)
     {

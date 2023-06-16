@@ -1,21 +1,15 @@
-﻿
-
-namespace IntegratedProtection.API.Controllers;
-
+﻿namespace IntegratedProtection.API.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class CriminalController : IntegratedProtectionController
 {
-    public CriminalController(IMediator mediator) : base(mediator)
-    {
-    }
-
+    public CriminalController(IMediator mediator) : base(mediator) { }
     #region POST
-
     [HttpPost, ActionName("Post")]
     public async Task<IActionResult> CreateCriminal([FromForm] PostCriminalViewModel viewModel)
     {
-        var response = await _mediator.Send(new PostCriminalCommand(viewModel));
+        var response =
+            await _mediator.Send(new PostCriminalCommand(viewModel));
         return NewResult(response);
     }
     #endregion
@@ -26,7 +20,6 @@ public class CriminalController : IntegratedProtectionController
         var response = await _mediator.Send(new PutCriminalCommand(viewModel));
         return NewResult(response);
     }
-
     #endregion
 
     #region GET

@@ -18,20 +18,18 @@ public class Car : Base<int>
     [MaxLength(100)]
     public string Color { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Number { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
 
-
     public ICollection<StolenCar> StolenCars { get; set; }
     public ICollection<CarDriver> CarDriver { get; set; }
-
 
     [NotMapped]
     [DataType(DataType.Date)]

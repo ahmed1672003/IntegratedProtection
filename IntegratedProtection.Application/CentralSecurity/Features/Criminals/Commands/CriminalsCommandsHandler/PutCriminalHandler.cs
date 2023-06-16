@@ -1,6 +1,4 @@
 ﻿namespace IntegratedProtection.Application.CentralSecurity.Features.Criminals.Commands.CriminalsCommandsHandler;
-
-
 public sealed class PutCriminalHandler :
     ResponseHandler,
     IRequestHandler<PutCriminalCommand, Response<GetCriminalViewModel>>

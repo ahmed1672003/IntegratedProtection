@@ -34,8 +34,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     OwnerSSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Company = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Color = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
-                    Letters = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Letters = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

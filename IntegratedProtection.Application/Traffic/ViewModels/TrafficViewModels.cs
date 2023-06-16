@@ -16,10 +16,10 @@ public class PostCarViewModel
     [MaxLength(100)]
     public string Color { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Number { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]
@@ -43,10 +43,10 @@ public class PutCarViewModel
     [MaxLength(100)]
     public string Color { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Number { get; set; }
 
-    [MaxLength(4)]
+    [MaxLength(10)]
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]

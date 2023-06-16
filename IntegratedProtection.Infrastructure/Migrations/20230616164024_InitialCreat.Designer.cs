@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230616151634_InitialCreat")]
+    [Migration("20230616164024_InitialCreat")]
     partial class InitialCreat
     {
         /// <inheritdoc />
@@ -198,8 +198,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<string>("Letters")
                         .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -208,8 +208,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("OwnerSSN")
                         .IsRequired()
