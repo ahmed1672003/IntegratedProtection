@@ -4,7 +4,11 @@ namespace IntegratedProtection.API.Controllers;
 [ApiController]
 public class IntegratedProtectionServicesController : IntegratedProtectionController
 {
-    public IntegratedProtectionServicesController(IMediator mediator) : base(mediator) { }
+    private readonly IHttpClientFactory _httpClientFactory;
+    public IntegratedProtectionServicesController(IMediator mediator, IHttpClientFactory httpClientFactory = null) : base(mediator)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
     [HttpGet, ActionName(nameof(CarByPlate))]
     public async Task<IActionResult> CarByPlate(string letters, string number)
     {

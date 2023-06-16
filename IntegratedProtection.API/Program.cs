@@ -39,6 +39,9 @@ public class Program
            {
                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
            });
+
+        builder.Services
+            .AddHttpClient();
         #endregion
         #endregion
 
