@@ -12,7 +12,7 @@ public sealed class GetAllTrafficOfficersHandler :
     public async Task<Response<IEnumerable<GetTrafficOfficerViewModel>>> Handle(GetAllTrafficOfficersQuery request, CancellationToken cancellationToken)
     {
         if (!await _context.TrafficOfficers.IsExist())
-            return NoContent<IEnumerable<GetTrafficOfficerViewModel>>("no traffic officers founded !");
+            return NotFound<IEnumerable<GetTrafficOfficerViewModel>>("no traffic officers founded !");
 
         var models = await _context.TrafficOfficers.GetAllAsync();
 

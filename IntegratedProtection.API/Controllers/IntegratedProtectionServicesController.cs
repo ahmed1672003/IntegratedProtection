@@ -9,6 +9,7 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
     {
         _httpClientFactory = httpClientFactory;
     }
+
     [HttpGet, ActionName(nameof(CarByPlate))]
     public async Task<IActionResult> CarByPlate(string letters, string number)
     {
@@ -49,7 +50,7 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
     [HttpGet, ActionName(nameof(StolenCarByPlate))]
     public async Task<IActionResult> StolenCarByPlate(string number, string letters)
     {
-        var response = await _mediator.Send(new GetStolenCarWithTrafficOfficerQuery(number, letters));
+        var response = await _mediator.Send(new GetStolenCarByPlateQuery(number, letters));
         return NewResult(response);
     }
 

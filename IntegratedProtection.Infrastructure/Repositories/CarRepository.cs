@@ -18,4 +18,36 @@ public class CarRepository : Repository<Car>, ICarRepository
             .FirstOrDefaultAsync();
         return carWithDrivers;
     }
+
+    //public async Task<KeyValuePair<Car, bool>> GetStolenCarStateAsync(Expression<Func<Car, bool>> filter)
+    //{
+    //    Dictionary<Car, bool> carState = new();
+
+    //    var car = await _context.Cars
+    //            .Where(filter)
+    //            .Include(c => c.StolenCars)
+    //            .ThenInclude(c => c.TrafficOfficer)
+    //            .FirstOrDefaultAsync();
+
+    //    if (car.StolenCars.Any())
+    //        carState.Add(car, true);
+    //    else
+    //        carState.Add(car, false);
+
+    //    return carState.FirstOrDefault();
+    //}
+
+    public async Task<(Car car, bool state)> GetStolenCarStateAsync(Expression<Func<Car, bool>> filter)
+    {
+        var car = await _context.Cars
+                .Where(filter)
+                .Include(c => c.StolenCars)
+                .ThenInclude(c => c.TrafficOfficer)
+                .FirstOrDefaultAsync();
+
+        if (car.StolenCars.Any())
+            return (car, true);
+        else
+            return (car, false);
+    }
 }

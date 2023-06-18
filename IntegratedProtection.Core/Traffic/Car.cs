@@ -28,8 +28,8 @@ public class Car : Base<int>
     [DisplayFormat(DataFormatString = "MMMM dd, yyyy", ApplyFormatInEditMode = true)]
     public DateTime CreatedDate { get; set; }
 
-    public ICollection<StolenCar> StolenCars { get; set; }
-    public ICollection<CarDriver> CarDriver { get; set; }
+    public ICollection<StolenCar> StolenCars { get; set; } = new HashSet<StolenCar>();
+    public ICollection<CarDriver> CarDriver { get; set; } = new HashSet<CarDriver>();
 
     [NotMapped]
     [DataType(DataType.Date)]
@@ -58,12 +58,5 @@ public class Car : Base<int>
         {
             return $"{Number}-{Letters}";
         }
-    }
-
-    public Car()
-    {
-        //CreatedDate = DateTime.Now.Date;
-        CarDriver = new HashSet<CarDriver>();
-        StolenCars = new HashSet<StolenCar>();
     }
 }
