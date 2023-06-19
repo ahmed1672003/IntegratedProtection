@@ -56,7 +56,7 @@ public class Car : Base<int>
     {
         get
         {
-            return $"{Number}-{Letters}";
+            return $"{Number} - {Letters}";
         }
     }
 }

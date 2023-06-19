@@ -19,7 +19,7 @@ public class PostCarViewModel
     [MaxLength(10)]
     public string Number { get; set; }
 
-    [MaxLength(10)]
+    [MaxLength(100)]
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]
@@ -46,7 +46,7 @@ public class PutCarViewModel
     [MaxLength(10)]
     public string Number { get; set; }
 
-    [MaxLength(10)]
+    [MaxLength(100)]
     public string Letters { get; set; }
 
     [DataType(DataType.Date)]

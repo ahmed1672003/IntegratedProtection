@@ -14,7 +14,8 @@ public sealed class GetStolenCarByPlateHandler :
             return BadRequest<GetStolenCarWithTrafficOfficerViewModel>("letters & number field are required !");
 
         var number = new String(request.Plate.Where(Char.IsDigit).ToArray()).ToLower();
-        var letters = new String(request.Plate.Where(Char.IsLetter).ToArray()).ToLower();
+
+        var letters = new String(request.Plate.Where(c => Char.IsLetter(c) || Char.IsWhiteSpace(c)).ToArray()).Trim().ToLower();
 
         if (!await _context.Cars.IsExist(c => c.Letters.ToLower().Equals(letters) && c.Number.ToLower().Equals(number)))
             return NotFound<GetStolenCarWithTrafficOfficerViewModel>("car not founded !");
