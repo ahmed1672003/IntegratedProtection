@@ -31,7 +31,7 @@ public sealed class GetStolenCarByPlateHandler :
         }
         else
         {
-            return NotFound<GetStolenCarWithTrafficOfficerViewModel>("car is not stolen ");
+            return Success<GetStolenCarWithTrafficOfficerViewModel>(null, "car is not stolen ");
         }
     }
 }
