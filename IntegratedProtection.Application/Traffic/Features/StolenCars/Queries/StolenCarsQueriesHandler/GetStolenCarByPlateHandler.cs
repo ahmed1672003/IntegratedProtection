@@ -1,6 +1,5 @@
 ﻿using IntegratedProtection.Application.Traffic.Features.StolenCars.Queries.StolenCarsQueries;
 namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Queries.StolenCarsQueriesHandler;
-
 public sealed class GetStolenCarByPlateHandler :
     ResponseHandler,
     IRequestHandler<GetStolenCarByPlateQuery, Response<GetStolenCarWithTrafficOfficerViewModel>>
