@@ -9,6 +9,5 @@ public class CarConfigurations : IEntityTypeConfiguration<Car>
 
         builder.Property(c => c.Letters)
             .HasMaxLength(100);
-
     }
 }
