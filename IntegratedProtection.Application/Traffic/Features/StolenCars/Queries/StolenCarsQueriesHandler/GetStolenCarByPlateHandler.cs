@@ -10,16 +10,18 @@ public sealed class GetStolenCarByPlateHandler :
     public async Task<Response<GetStolenCarWithTrafficOfficerViewModel>>
         Handle(GetStolenCarByPlateQuery request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(request.Letters) || string.IsNullOrWhiteSpace(request.Letters)
-            || string.IsNullOrEmpty(request.Number) || string.IsNullOrWhiteSpace(request.Number))
+        if (string.IsNullOrEmpty(request.Plate) || string.IsNullOrWhiteSpace(request.Plate))
             return BadRequest<GetStolenCarWithTrafficOfficerViewModel>("letters & number field are required !");
 
-        if (!await _context.Cars.IsExist(c => c.Letters.Equals(request.Letters) && c.Number.Equals(request.Number)))
+        var number = new String(request.Plate.Where(Char.IsDigit).ToArray()).ToLower();
+        var letters = new String(request.Plate.Where(Char.IsLetter).ToArray()).ToLower();
+
+        if (!await _context.Cars.IsExist(c => c.Letters.ToLower().Equals(letters) && c.Number.ToLower().Equals(number)))
             return NotFound<GetStolenCarWithTrafficOfficerViewModel>("car not founded !");
 
         var modelState =
             await _context.Cars.
-            GetStolenCarStateAsync(c => c.Number.Equals(request.Number) && c.Letters.Equals(request.Letters));
+            GetStolenCarStateAsync(c => c.Number.ToLower().Equals(number) && c.Letters.ToLower().Equals(letters));
 
         if (modelState.state)
         {

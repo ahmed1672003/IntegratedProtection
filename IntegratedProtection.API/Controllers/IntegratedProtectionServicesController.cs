@@ -11,10 +11,10 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
     }
 
     [HttpGet, ActionName(nameof(CarByPlate))]
-    public async Task<IActionResult> CarByPlate(string letters, string number)
+    public async Task<IActionResult> CarByPlate(string plate)
     {
         var response =
-            await _mediator.Send(new GetCarByPlateQuery(letters, number));
+            await _mediator.Send(new GetCarByPlateQuery(plate));
         return NewResult(response);
     }
 
@@ -48,9 +48,9 @@ public class IntegratedProtectionServicesController : IntegratedProtectionContro
     }
 
     [HttpGet, ActionName(nameof(StolenCarByPlate))]
-    public async Task<IActionResult> StolenCarByPlate(string number, string letters)
+    public async Task<IActionResult> StolenCarByPlate(string plate)
     {
-        var response = await _mediator.Send(new GetStolenCarByPlateQuery(number, letters));
+        var response = await _mediator.Send(new GetStolenCarByPlateQuery(plate));
         return NewResult(response);
     }
 

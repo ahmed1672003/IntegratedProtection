@@ -1,4 +1,4 @@
 ﻿namespace IntegratedProtection.Application.Traffic.Features.StolenCars.Queries.StolenCarsQueries;
 
-public record GetStolenCarByPlateQuery(string Number, string Letters) : 
+public record GetStolenCarByPlateQuery(string Plate) :
 IRequest<Response<GetStolenCarWithTrafficOfficerViewModel>>;

@@ -30,9 +30,9 @@ public class StolenCarController : IntegratedProtectionController
     }
 
     [HttpGet, ActionName("GetByPlate")]
-    public async Task<IActionResult> GetByPlate(string number, string letters)
+    public async Task<IActionResult> GetByPlate(string plate)
     {
-        var response = await _mediator.Send(new GetStolenCarByPlateQuery(number, letters));
+        var response = await _mediator.Send(new GetStolenCarByPlateQuery(plate));
         return NewResult(response);
     }
     #endregion

@@ -52,14 +52,11 @@ public class CarController : IntegratedProtectionController
     }
 
     [HttpGet, ActionName("GetByPlate")]
-    public async Task<IActionResult> GetByPlate(string letters, string number)
+    public async Task<IActionResult> GetByPlate(string plate)
     {
-        var response = await _mediator.Send(new GetCarByPlateQuery(letters, number));
-
+        var response = await _mediator.Send(new GetCarByPlateQuery(plate));
         return NewResult(response);
     }
-
-
     #endregion
 
     #region => DELETE
