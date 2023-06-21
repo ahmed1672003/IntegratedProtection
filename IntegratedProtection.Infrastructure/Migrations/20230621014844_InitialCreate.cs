@@ -15,10 +15,28 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 name: "CivilRegistry");
 
             migrationBuilder.EnsureSchema(
+                name: "Files");
+
+            migrationBuilder.EnsureSchema(
                 name: "Traffic");
 
             migrationBuilder.EnsureSchema(
                 name: "CentralSecurity");
+
+            migrationBuilder.CreateTable(
+                name: "CarFiles",
+                schema: "Files",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SRC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Mode = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarFiles", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Cars",
@@ -69,6 +87,21 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drivers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonFiles",
+                schema: "Files",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SRC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Mode = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonFiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,10 +236,22 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarFiles_FileName",
+                schema: "Files",
+                table: "CarFiles",
+                column: "FileName");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CarsDrivers_DriverId",
                 schema: "Traffic",
                 table: "CarsDrivers",
                 column: "DriverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonFiles_FileName",
+                schema: "Files",
+                table: "PersonFiles",
+                column: "FileName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StolenCars_TrafficOfficerId",
@@ -223,12 +268,20 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 schema: "CivilRegistry");
 
             migrationBuilder.DropTable(
+                name: "CarFiles",
+                schema: "Files");
+
+            migrationBuilder.DropTable(
                 name: "CarsDrivers",
                 schema: "Traffic");
 
             migrationBuilder.DropTable(
                 name: "Criminals",
                 schema: "CentralSecurity");
+
+            migrationBuilder.DropTable(
+                name: "PersonFiles",
+                schema: "Files");
 
             migrationBuilder.DropTable(
                 name: "StolenCars",

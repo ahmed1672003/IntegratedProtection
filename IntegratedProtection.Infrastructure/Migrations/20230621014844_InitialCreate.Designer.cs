@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230621012945_InitialCreate")]
+    [Migration("20230621014844_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -156,6 +156,54 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons", "CivilRegistry");
+                });
+
+            modelBuilder.Entity("IntegratedProtection.Core.FilesEntity.CarFile", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Mode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SRC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileName");
+
+                    b.ToTable("CarFiles", "Files");
+                });
+
+            modelBuilder.Entity("IntegratedProtection.Core.FilesEntity.PersonFile", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Mode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SRC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileName");
+
+                    b.ToTable("PersonFiles", "Files");
                 });
 
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Car", b =>

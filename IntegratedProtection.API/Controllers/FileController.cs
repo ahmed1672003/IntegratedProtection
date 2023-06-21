@@ -9,10 +9,8 @@ namespace IntegratedProtection.API.Controllers;
 [ApiController]
 public class FileController : IntegratedProtectionController
 {
-    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public FileController(IMediator mediator, IWebHostEnvironment environment) : base(mediator) =>
-        _webHostEnvironment = environment;
+    public FileController(IMediator mediator) : base(mediator) { }
     #region Post
 
     [HttpPost, ActionName(nameof(PostCarFile))]
@@ -25,7 +23,7 @@ public class FileController : IntegratedProtectionController
     [HttpPost, ActionName(nameof(PostPersonFile))]
     public async Task<IActionResult> PostPersonFile([FromForm] PostFileViewModel viewModel)
     {
-        var response = await _mediator.Send(new PostCarFileCommand(viewModel));
+        var response = await _mediator.Send(new PostPersonFileCommand(viewModel));
         return NewResult(response);
     }
     #endregion

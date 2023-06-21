@@ -16,7 +16,7 @@ public class PostCarFileHandler :
         if (request.ViewModel.SRC is null || request.ViewModel.FileName is null)
             return BadRequest<GetFileViewModel>();
 
-        if (!await _context.CarFiles.IsExist(f => f.FileName.Equals(request.ViewModel.FileName)))
+        if (await _context.CarFiles.IsExist(f => f.FileName.Equals(request.ViewModel.FileName)))
             return BadRequest<GetFileViewModel>(message: "file founded");
 
         var model = _mapper.Map<CarFile>(request.ViewModel);

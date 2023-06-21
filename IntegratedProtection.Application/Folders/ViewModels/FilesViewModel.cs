@@ -3,6 +3,8 @@ public class PostFileViewModel
 {
     public string SRC { get; set; }
     public string FileName { get; set; }
+    public int Mode { get; set; }
+
 }
 
 public class GetFileViewModel

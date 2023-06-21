@@ -1,4 +1,5 @@
 ﻿using IntegratedProtection.Core.FilesEntity;
+using IntegratedProtection.Infrastructure.Configurations.FilesConfigurations;
 
 namespace IntegratedProtection.Infrastructure.Context;
 public class IntegratedProtectionDbContext : DbContext
@@ -16,6 +17,8 @@ public class IntegratedProtectionDbContext : DbContext
         new DriverConfigurations().Configure(builder.Entity<Driver>());
         new StolenCarConfigurations().Configure(builder.Entity<StolenCar>());
         new TrafficOfficerConfigurations().Configure(builder.Entity<TrafficOfficer>());
+        new CarFileConfigurations().Configure(builder.Entity<CarFile>());
+        new PersonFileConfigurations().Configure(builder.Entity<PersonFile>());
     }
 
     #region Central Security Database Mapping
