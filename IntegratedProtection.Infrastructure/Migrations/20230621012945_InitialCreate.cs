@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreat : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
             migrationBuilder.EnsureSchema(
                 name: "CentralSecurity");
 
-            migrationBuilder.EnsureSchema(
-                name: "Files");
-
             migrationBuilder.CreateTable(
                 name: "Cars",
                 schema: "Traffic",
@@ -34,8 +31,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     OwnerSSN = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Company = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Color = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Letters = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Letters = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -116,20 +113,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TrafficOfficers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UploadedFiles",
-                schema: "Files",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SRC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsPersonsFile = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UploadedFiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -250,10 +233,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "StolenCars",
                 schema: "Traffic");
-
-            migrationBuilder.DropTable(
-                name: "UploadedFiles",
-                schema: "Files");
 
             migrationBuilder.DropTable(
                 name: "Persons",

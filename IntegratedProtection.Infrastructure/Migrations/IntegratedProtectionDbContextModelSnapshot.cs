@@ -155,23 +155,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.ToTable("Persons", "CivilRegistry");
                 });
 
-            modelBuilder.Entity("IntegratedProtection.Core.FilesEntity.UploadedFile", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsPersonsFile")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SRC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UploadedFiles", "Files");
-                });
-
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Car", b =>
                 {
                     b.Property<int>("Id")

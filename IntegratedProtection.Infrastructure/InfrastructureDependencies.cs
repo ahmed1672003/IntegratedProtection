@@ -10,8 +10,6 @@ public static class InfrastructureDependencies
             options.UseSqlServer(configuration.GetConnectionString("IntegratedProtectionConnection"));
         });
         services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
-
         return services;
     }
-
 }

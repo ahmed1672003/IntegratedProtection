@@ -1,5 +1,7 @@
-﻿using IntegratedProtection.Application.Folders.Commands.FilesCommands;
-using IntegratedProtection.Application.Folders.Queries.FilesQueries;
+﻿using IntegratedProtection.Application.Folders.CarFiles.Commands.FilesCommands;
+using IntegratedProtection.Application.Folders.CarFiles.Queries.FilesQueries;
+using IntegratedProtection.Application.Folders.PerosnFiles.Commands.FilesCommands;
+using IntegratedProtection.Application.Folders.PerosnFiles.Queries.FilesQueries;
 using IntegratedProtection.Application.Folders.ViewModels;
 
 namespace IntegratedProtection.API.Controllers;
@@ -11,18 +13,28 @@ public class FileController : IntegratedProtectionController
 
     public FileController(IMediator mediator, IWebHostEnvironment environment) : base(mediator) =>
         _webHostEnvironment = environment;
+    #region Post
 
-    [HttpPost, ActionName(nameof(Upload))]
-    public async Task<IActionResult> Upload([FromForm] PostFileViewModel viewModel)
+    [HttpPost, ActionName(nameof(PostCarFile))]
+    public async Task<IActionResult> PostCarFile([FromForm] PostFileViewModel viewModel)
     {
-        var response = await _mediator.Send(new PostFileCommand(viewModel));
+        var response = await _mediator.Send(new PostCarFileCommand(viewModel));
         return NewResult(response);
     }
 
+    [HttpPost, ActionName(nameof(PostPersonFile))]
+    public async Task<IActionResult> PostPersonFile([FromForm] PostFileViewModel viewModel)
+    {
+        var response = await _mediator.Send(new PostCarFileCommand(viewModel));
+        return NewResult(response);
+    }
+    #endregion
+
+    #region Get
     [HttpGet, ActionName(nameof(GetCarFile))]
     public async Task<IActionResult> GetCarFile()
     {
-        var response = await _mediator.Send(new GetFileCarQuery());
+        var response = await _mediator.Send(new GetCarFileQuery());
         return NewResult(response);
     }
 
@@ -32,21 +44,21 @@ public class FileController : IntegratedProtectionController
         var response = await _mediator.Send(new GetPersonFileQuery());
         return NewResult(response);
     }
+    #endregion
 
-    [HttpDelete, ActionName(nameof(Delete))]
-    public async Task<IActionResult> Delete(string id)
+    #region Delete
+    [HttpDelete, ActionName(nameof(DeleteAllCarFiles))]
+    public async Task<IActionResult> DeleteAllCarFiles()
     {
-        var response =
-
-            await _mediator.Send(new DeleteFileByIdCommand(id));
+        var response = await _mediator.Send(new DeleteAllCarFilesCommand());
         return NewResult(response);
     }
 
-
-    [HttpDelete, ActionName(nameof(DeleteAll))]
-    public async Task<IActionResult> DeleteAll()
+    [HttpDelete, ActionName(nameof(DeleteAllPersonFiles))]
+    public async Task<IActionResult> DeleteAllPersonFiles()
     {
-        var response = await _mediator.Send(new DeleteAllFilesCommand(_webHostEnvironment.WebRootPath));
+        var response = await _mediator.Send(new DeleteAllPersonsFilesCommand());
         return NewResult(response);
     }
+    #endregion
 }

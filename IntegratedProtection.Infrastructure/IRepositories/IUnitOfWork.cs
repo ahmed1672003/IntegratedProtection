@@ -10,8 +10,8 @@ public interface IUnitOfWork : IAsyncDisposable
     IPersonRepository Persons { get; }
     IStolenCarRepository StolenCars { get; }
     ITrafficOfficerRepository TrafficOfficers { get; }
-
-    IUploadedFileRepository UploadedFiles { get; }
+    ICarFileRepository CarFiles { get; }
+    IPersonFileRepository PersonFiles { get; }
 
     Task<int> SaveChangesAsync();
 }

@@ -247,13 +247,17 @@ public class IntegratedProtectionMapper : Profile
 
 
     #region Files
+    // ToDo Mapping
     public void PostFileMapper()
     {
-        CreateMap<PostFileViewModel, UploadedFile>().ReverseMap();
+        CreateMap<PostFileViewModel, CarFile>().ReverseMap();
+        CreateMap<PostFileViewModel, PersonFile>().ReverseMap();
     }
+
     public void GetFileMapper()
     {
-        CreateMap<UploadedFile, GetFileViewModel>().ReverseMap();
+        CreateMap<CarFile, GetFileViewModel>().ReverseMap();
+        CreateMap<PersonFile, GetFileViewModel>().ReverseMap();
     }
     #endregion
 }

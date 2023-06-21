@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntegratedProtection.Infrastructure.Migrations
 {
     [DbContext(typeof(IntegratedProtectionDbContext))]
-    [Migration("20230616164024_InitialCreat")]
-    partial class InitialCreat
+    [Migration("20230621012945_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,23 +158,6 @@ namespace IntegratedProtection.Infrastructure.Migrations
                     b.ToTable("Persons", "CivilRegistry");
                 });
 
-            modelBuilder.Entity("IntegratedProtection.Core.FilesEntity.UploadedFile", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsPersonsFile")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SRC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UploadedFiles", "Files");
-                });
-
             modelBuilder.Entity("IntegratedProtection.Core.Traffic.Car", b =>
                 {
                     b.Property<int>("Id")
@@ -198,8 +181,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<string>("Letters")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -208,8 +191,8 @@ namespace IntegratedProtection.Infrastructure.Migrations
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("OwnerSSN")
                         .IsRequired()

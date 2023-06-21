@@ -10,7 +10,8 @@ public class UnitOfWork : IUnitOfWork
     public IPersonRepository Persons { get; private set; }
     public IStolenCarRepository StolenCars { get; private set; }
     public ITrafficOfficerRepository TrafficOfficers { get; private set; }
-    public IUploadedFileRepository UploadedFiles { get; private set; }
+    public ICarFileRepository CarFiles { get; private set; }
+    public IPersonFileRepository PersonFiles { get; private set; }
 
     public UnitOfWork(IntegratedProtectionDbContext context)
     {
@@ -23,7 +24,9 @@ public class UnitOfWork : IUnitOfWork
         Persons = new PersonRepository(_context);
         StolenCars = new StolenCarRepository(_context);
         TrafficOfficers = new TrafficOfficerRepository(_context);
-        UploadedFiles = new UploadedFileRepository(_context);
+        CarFiles = new CarFileRepository(_context);
+        PersonFiles = new PersonFileRepository(_context);
+
 
     }
     public async ValueTask DisposeAsync() => await _context.DisposeAsync();

@@ -1,5 +1,4 @@
 ﻿using IntegratedProtection.Core.FilesEntity;
-using IntegratedProtection.Infrastructure.Configurations.Files;
 
 namespace IntegratedProtection.Infrastructure.Context;
 public class IntegratedProtectionDbContext : DbContext
@@ -17,7 +16,6 @@ public class IntegratedProtectionDbContext : DbContext
         new DriverConfigurations().Configure(builder.Entity<Driver>());
         new StolenCarConfigurations().Configure(builder.Entity<StolenCar>());
         new TrafficOfficerConfigurations().Configure(builder.Entity<TrafficOfficer>());
-        new UploadedFileConfigurations().Configure(builder.Entity<UploadedFile>());
     }
 
     #region Central Security Database Mapping
@@ -36,5 +34,6 @@ public class IntegratedProtectionDbContext : DbContext
     public DbSet<StolenCar> StolenCars { get; set; }
     public DbSet<TrafficOfficer> TrafficOfficers { get; set; }
     #endregion
-    public DbSet<UploadedFile> UploadedFiles { get; set; }
+    public DbSet<PersonFile> PersonFiles { get; set; }
+    public DbSet<CarFile> CarFiles { get; set; }
 }
