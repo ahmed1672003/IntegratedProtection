@@ -1,4 +1,6 @@
-﻿namespace IntegratedProtection.Application.IHelpers;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace IntegratedProtection.Application.IHelpers;
 
 public interface IFileHelper
 {

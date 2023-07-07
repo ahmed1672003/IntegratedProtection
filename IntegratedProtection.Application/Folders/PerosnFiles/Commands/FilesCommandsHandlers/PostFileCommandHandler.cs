@@ -22,7 +22,7 @@ public class PostPersonFileCommandHandler :
         await _context.PersonFiles.AddAsync(model);
         try
         {
-           var result =  await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
         }
         catch (Exception)
         {

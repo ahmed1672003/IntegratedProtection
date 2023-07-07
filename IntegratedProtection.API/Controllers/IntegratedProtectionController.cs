@@ -1,5 +1,6 @@
-﻿using IntegratedProtection.Application.Bases;
-using System.Net;
+﻿using System.Net;
+
+using IntegratedProtection.Application.Bases;
 namespace IntegratedProtection.API.Controllers;
 
 [Route("api/[controller]")]

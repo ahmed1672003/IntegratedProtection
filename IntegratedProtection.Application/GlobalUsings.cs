@@ -20,7 +20,6 @@ global using IntegratedProtection.Infrastructure.IRepositories;
 
 global using MediatR;
 
-global using Microsoft.AspNetCore.Http;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
 
